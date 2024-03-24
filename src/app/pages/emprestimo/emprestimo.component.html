@@ -1,0 +1,97 @@
+<app-modal [title]="'Criar emprestimo'" #modalCreate>
+    <div class="modal-content">
+        <ng-container *ngTemplateOutlet="tptEmprest"></ng-container>
+        <br>
+        <button class="btn" (click)="create()">Cadastrar</button>
+    </div>
+</app-modal>
+<app-modal [title]="'Editar emprestimo'" #modalEdit>
+    <div class="modal-content">
+        <ng-container *ngTemplateOutlet="tptEmprest"></ng-container>
+        <br>
+        <button class="btn" (click)="editar()">Editar</button>
+    </div>
+</app-modal>
+
+<ng-template #tptEmprest>
+    <div class="fields" [formGroup]="emprestForm">
+        <div class="field">
+            <label for="titulo">Titulo</label>
+            <div class="box">
+                <input id="titulo" type="text" placeholder="titulo" formControlName="titulo">
+            </div>
+        </div>
+        <div class="field">
+            <label for="matricula">Matricula do aluno</label>
+            <div class="box">
+                <input id="matricula" type="text" placeholder="matricula" formControlName="matricula">
+            </div>
+        </div>
+        <div class="field">
+            <label for="livros">Livros</label>
+            <div class="box">
+                <input id="livros" type="text" placeholder="Livros" formControlName="livros">
+            </div>
+        </div>
+        <div class="field">
+            <label for="dateDevolution">Data de devolução</label>
+            <div class="box">
+                <input id="dateDevolution" type="date" placeholder="data" formControlName="dataDevolucao">
+            </div>
+        </div>
+    </div>
+</ng-template>
+
+<section class="emprest">
+    <div class="side-left">
+        <button class="btn" (click)="modalCreate.setActive(true)">Cadastrar emprestimo</button>
+        @for (turma of getTurmas(); track $index) {
+        <app-dropdown [title]="turma">
+            @for (aluno of alunosByTurma(turma); track $index) {
+            <app-dropdown [title]="aluno">
+                <ul class="ler">
+                    @for (emprest of getEmprestimoByAluno(turma, aluno) | async; track $index) {
+                    <li class="emprest-row" [ngClass]="statusEmprestimo(emprest)" (click)="emprestEscolhi = emprest">
+                        {{emprest.titulo}}</li>
+                    }
+                </ul>
+            </app-dropdown>
+            }
+        </app-dropdown>
+        }
+    </div>
+    <div class="side-right">
+        @if (emprestEscolhi) {
+        <h1>{{emprestEscolhi?.titulo}}</h1>
+        <h3>{{emprestEscolhi?.aluno?.nome}} - {{emprestEscolhi?.aluno?.turma}}</h3>
+        <div class="livros">
+            @for (livro of emprestEscolhi?.livros; track $index) {
+            <div class="livro">
+                {{livro.titulo}}
+            </div>
+            }
+        </div>
+        <div class="datas">
+            <div class="criacao">
+                <h3>Data de Criação:</h3>
+                <p>{{emprestEscolhi?.dataCriacao | date : 'dd/MM/yyyy'}}</p>
+            </div>
+            <div class="devolucao">
+                <h3>Prazo para Devolução:</h3>
+                <p>{{emprestEscolhi?.dataDevolucao | date : 'dd/MM/yyyy'}}</p>
+            </div>
+        </div>
+        <button class="btn btn-l edt" (click)="setValues(); modalEdit.setActive(true)">Editar Emprestimo</button>
+        <button class="btn btn-l dlt" (click)="deleteEmprest()">Deletar Emprestimo</button>
+        @if(emprestEscolhi.dataDevolvida){
+        <h3>Data de Devolução:</h3>
+        <p>{{emprestEscolhi?.dataDevolucao | date : 'dd/MM/yyyy'}}</p>
+        }
+        }@else {
+        <div class="preview">
+            <img src="../../../assets/Library-pana.svg" alt="">
+            <h2>Nenhum emprestimo selecionado</h2>
+        </div>
+        }
+    </div>
+</section>

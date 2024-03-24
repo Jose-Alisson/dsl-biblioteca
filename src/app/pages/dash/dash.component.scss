@@ -1,0 +1,280 @@
+* {
+  margin: 0;
+}
+
+app-side-bar ul {
+  list-style: none;
+  display: flex;
+  gap: 10px;
+  flex-direction: column;
+  padding: 15px;
+
+  li {
+    padding: 15px 20px;
+    color: aquamarine;
+    border-radius: 7px;
+    transition: 0.2s ease;
+    gap: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  li.active {
+    background: #181818;
+  }
+}
+
+header {
+  background: #060606;
+}
+
+header > span {
+  padding: 10px 0px;
+  width: 90%;
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+  margin: auto;
+  color: white;
+
+  * {
+    margin: 0;
+  }
+
+  button {
+    color: #feca57;
+    border: 2px solid #feca57;
+    border-radius: 20px;
+    padding: 7px 15px;
+    background: transparent;
+  }
+}
+
+header nav {
+  width: 90%;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  color: white;
+
+  height: 70px;
+
+  .establisment {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+
+  .image-text {
+    display: flex;
+    gap: 3px;
+    overflow: hidden;
+    align-items: center;
+  }
+
+  .image {
+    min-width: 50px;
+    min-height: 50px;
+    border-radius: 100%;
+
+    img {
+      width: 50px;
+      height: 50px;
+    }
+  }
+
+  .text {
+    font-size: 16px;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+
+  .header-text {
+    display: flex;
+    flex-direction: column;
+    transition: 0.2s ease;
+  }
+
+  ul {
+    display: flex;
+    gap: 25px;
+    list-style: none;
+
+    li {
+      font-size: 1.8rem;
+      cursor: pointer;
+    }
+  }
+
+  .nav-actions {
+    display: flex;
+    gap: 20px;
+    font-size: 2.2rem;
+
+    .action {
+      transition: 0.2s;
+      padding: 10px;
+      border-radius: 50%;
+
+      &:hover {
+        background: #181818;
+      }
+    }
+
+    .lupa,
+    .menu {
+      display: none;
+    }
+  }
+
+  .search {
+    position: relative;
+
+    .icon {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      left: 8px;
+      font-size: 18px;
+    }
+
+    input {
+      outline: none;
+      background: #181818;
+      border: 0;
+      border-radius: 20px;
+      padding: 10px 5px 10px 35px;
+      color: white;
+      font-family: "Work Sans", sans-serif;
+      font-size: 18px;
+      font-weight: 500;
+    }
+  }
+}
+
+@media screen and (max-width: 955px) {
+  header nav {
+    .header-text {
+      display: none;
+    }
+  }
+}
+
+@media screen and (max-width: 838px) {
+  .nav-actions {
+    .search {
+      display: none;
+    }
+
+    .lupa {
+      display: block !important;
+    }
+  }
+}
+
+@media screen and (max-width: 490px) {
+  header nav ul {
+    display: none;
+  }
+
+  header nav .nav-actions {
+    .menu {
+      display: block;
+    }
+  }
+}
+
+.spanded {
+  background: #060606;
+  display: none;
+
+  .search {
+    position: relative;
+
+    .icon {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      left: 8px;
+      font-size: 18px;
+      color: white;
+    }
+
+    input {
+      outline: none;
+      width: 100%;
+      background: #181818;
+      border: 0;
+      padding: 10px 5px 10px 35px;
+      color: white;
+      font-family: "Work Sans", sans-serif;
+      font-size: 18px;
+      font-weight: 500;
+    }
+  }
+}
+
+.spanded.active {
+  display: block;
+}
+
+.footer {
+  padding: 2em;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.footer {
+  background: #060606;
+  color: white;
+  font-family: "Ubuntu", sans-serif;
+}
+
+.footer-content {
+  width: 90%;
+  flex-wrap: wrap;
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  font-size: 18px;
+  font-family: "Roboto", sans-serif;
+  text-decoration: none;
+}
+
+.text-box.wraper {
+  display: flex;
+  gap: 20px;
+  width: 60%;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.text-box a {
+  color: white;
+}
+
+.box-title {
+  font-family: "Ubuntu", sans-serif;
+  font-weight: bold;
+}
+
+.text-box ul {
+  list-style: none;
+}
+
+@media screen and (max-width: 580px) {
+  .footer {
+    align-items: flex-start;
+  }
+}
+
+@media screen and (max-width: 652px) {
+  .footer {
+    padding: 1em;
+  }
+}

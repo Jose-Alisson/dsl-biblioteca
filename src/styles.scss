@@ -1,0 +1,108 @@
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Montserrat:ital,wght@0,400;0,700;1,400;1,700&family=Roboto:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Ubuntu:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&family=Work+Sans:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&display=swap");
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  font-family: "Work Sans", sans-serif;
+}
+
+i {
+  display: flex;
+  align-items: center;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Montserrat", sans-serif;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-size: 2.6rem;
+  margin: 0;
+  //background: #060606;
+}
+
+.slider-move {
+  grid-template-columns: auto;
+  grid-auto-flow: column;
+  overflow-x: auto;
+  max-width: inherit;
+}
+
+.fields{
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.field label{
+  font-size: 1.8rem;
+}
+
+.field{
+  display: flex;
+  flex-direction: column;
+}
+
+.field input{
+  background: var(--color-primary);
+  border-radius: 7px;
+  padding: 10px 15px;
+  outline: none;
+  color: var(--color-secondy);
+  border: 2px solid var(--color-border);
+  width: 100%;
+}
+
+// @keyframes fade-in {
+//   from {
+//     opacity: 50%;
+//   }
+// }
+
+// @keyframes fade-out {
+//   from {
+//     opacity: 50%;
+//   }
+// }
+
+// @keyframes slide-right {
+//   from {
+//     transform: translateX(33px);
+//   }
+// }
+
+// @keyframes slide-left {
+//   from {
+//     transform: translateX(-33px);
+//   }
+// }
+
+// ::view-transition-old(root) {
+//   animation: 0.2s fade-out, 0.2s slide-left;
+// }
+
+// ::view-transition-new(root) {
+//   animation: 0.2s fade-in, 0.2s slide-right;
+// }
+
+@media screen and (max-width: 652px) {
+  html {
+    font-size: 50%;
+  }
+}
+
+@media screen and (max-width: 552px) {
+  html {
+    font-size: 37.5%;
+  }
+}

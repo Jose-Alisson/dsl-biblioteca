@@ -1,0 +1,9 @@
+<div class="wrapper" #wrapper>
+    <div class="wrapper-header" (click)="toggleWrapper(wrapper)">
+        <span>{{title}}</span>
+        <span><i class="fi fi-rr-caret-up"></i></span>
+    </div>
+    <div class="wrapper-body">
+        <ng-content></ng-content>
+    </div>
+</div>

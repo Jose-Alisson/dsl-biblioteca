@@ -1,0 +1,75 @@
+<app-modal [title]="'Criar aluno'" #modalCreate>
+  <div class="modal-content">
+    <ng-container *ngTemplateOutlet="formTpt"></ng-container>
+    <br>
+    <button class="btn" (click)="create()">Cadastrar</button>
+  </div>
+</app-modal>
+
+<app-modal [title]="'Editar aluno'" #modalEdit>
+  <div class="modal-content">
+    <ng-container *ngTemplateOutlet="formTpt"></ng-container>
+    <br>
+    <button class="btn" (click)="edit()">Editar</button>
+  </div>
+</app-modal>
+
+<ng-template #formTpt>
+  <div class="fields" [formGroup]="alunoForm">
+    <div class="field">
+      <label for="nome">Nome</label>
+      <div class="box">
+        <input id="nome" type="text" placeholder="nome" formControlName="nome">
+      </div>
+    </div>
+    <div class="field">
+      <label for="matricula">matricula</label>
+      <div class="box">
+        <input id="matricula" type="text" placeholder="matricula" formControlName="matricula">
+      </div>
+    </div>
+    <div class="field">
+      <label for="turma">Turma</label>
+      <div class="box">
+        <input id="turma" type="text" placeholder="turma" formControlName="turma">
+      </div>
+    </div>
+    <div class="field">
+      <label for="turno">Turno</label>
+      <div class="box">
+        <input id="turno" type="text" placeholder="turno" formControlName="turno">
+      </div>
+    </div>
+    
+  </div>
+</ng-template>
+
+<section class="aluno">
+  <div class="side-left">
+    <button class="btn" (click)="limparForm();modalCreate.setActive(true)">Cadastrar aluno</button>
+    @for (turma of turmas$ | async; track $index) {
+    <app-dropdown [title]="turma">
+      <ul class="ler">
+        @for (aluno of getAlunosByTurma(turma) ; track $index) {
+        <li class="emprest-row" (click)="aluno_ = aluno">{{aluno.nome}}</li>
+        }
+      </ul>
+    </app-dropdown>
+    }
+  </div>
+  <div class="side-right">
+    @if (aluno_) {
+      <h1>{{aluno_?.nome}}</h1>
+      <h3>Turma: {{aluno_?.turma}} - {{aluno_?.turno}}</h3>
+      <h3>Matricula: {{aluno_?.matricula}}</h3>
+      <button class="btn edt btn-l" (click)="setValues(); modalEdit.setActive(true)">Editar</button>
+      <button class="btn dlt btn-l" (click)="delete()">Deletar</button>
+    }
+    @else {
+    <div class="preview">
+      <img src="../../../assets/Students-bro.svg" alt="">
+      <h2>Nenhum aluno selecionado</h2>
+    </div>
+    }
+  </div>
+</section>

@@ -1,0 +1,66 @@
+<app-side-bar [side]="'right'" #side>
+  <ul>
+    <!-- <li [routerLink]="['./home']" routerLinkActive="active">
+      <i class="fi fi-rr-home"></i>
+      <h2>Inicio</h2>
+      &nbsp;
+    </li> -->
+    <li [routerLink]="['./menu']" routerLinkActive="active">
+      <i class="fi fi-rs-book"></i>
+      <h2>Livros</h2>
+      &nbsp;
+    </li>
+    <li [routerLink]="['./emprest']" routerLinkActive="active">
+      <i class="fi fi-rr-budget-alt"></i>
+      <h2>Emprestimos</h2>
+      &nbsp;
+    </li>
+    <li [routerLink]="['./aluno']" routerLinkActive="active">
+      <i class="fi fi-rs-student"></i>
+      <h2>Alunos</h2>
+      &nbsp;
+    </li>
+  </ul>
+</app-side-bar>
+<app-cart #cart ></app-cart>
+<header>
+  <nav>
+    <div class="image-text">
+      <div class="image">
+        <img src="../../../assets/dsl logo.jpg" alt="Logo DSl" />
+      </div>
+      <div class="text header-text">
+        <div class="establishment">DSL</div>
+        <div class="name">Biblioteca</div>
+      </div>
+    </div>
+    <ul>
+      <li [routerLink]="['./menu']">Livros</li>
+      <li [routerLink]="['./emprest']">Emprestimos</li>
+      <li [routerLink]="['./aluno']">Alunos</li>
+    </ul>
+    <div class="nav-actions">
+      <!-- <div class="search">
+        <div class="icon">
+          <i class="fi fi-rr-search"></i>
+        </div>
+        <input type="text" placeholder="Pesquisar" (keyup)="search($event)" [formControl]="searchControl"/>
+      </div>
+      <div class="action lupa" (click)="searchEspaded.classList.toggle('active')">
+        <i class="fi fi-rr-search"></i>
+      </div> -->
+      <div class="action menu" (click)="side.toogleActive()">
+        <i class="fi fi-rr-menu-burger"></i>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="spanded" #searchEspaded>
+  <div class="search">
+    <div class="icon">
+      <i class="fi fi-rr-search"></i>
+    </div>
+    <input type="text" placeholder="Pesquisar" (keyup)="search($event)" [formControl]="searchControl"/>
+  </div>
+</div>
+<router-outlet></router-outlet>

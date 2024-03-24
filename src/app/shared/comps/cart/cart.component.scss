@@ -1,0 +1,121 @@
+:host {
+  color: white;
+}
+
+.content{
+  height: calc(100% - 78px);
+  display: grid;
+  grid-template-columns: 1fr; /* Apenas uma coluna */
+  grid-template-rows: 1fr auto; /* A primeira e terceira linhas têm altura automática, a segunda ocupa o restante */
+  gap: 10px; /* Espaçamento entre as linhas */
+}
+
+.item-product {
+  background: var(--color-white);
+  display: flex;
+  align-items: center;
+  /*border-bottom: 1px var(--color-black) solid;*/
+  color: var(--color-black);
+  padding: 15px;
+  gap: 10px;
+}
+
+.item-view {
+  width: 100px;
+  height: 100px;
+  background: rgba(128 128 128 / 17%);
+  border-radius: 7px;
+  overflow: hidden;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+}
+
+.item-product .item-description {
+  flex: 1;
+}
+
+.item-product .item-description p {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  -webkit-line-clamp: 2;
+  text-overflow: ellipsis;
+}
+
+.item-product .unique {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+.amount {
+  display: flex;
+  padding: 7px 0px;
+  align-items: center;
+}
+
+.amount .decrement,
+.amount .increment {
+  width: 25px;
+  height: 25px;
+  background: #181818;
+  display: flex;
+  padding: 20px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  border-radius: 20px;
+}
+
+.amount .counter {
+  padding: 0px 20px;
+}
+
+.amount .counter p {
+  font-family: "Montserrat", sans-serif;
+}
+
+.subtotal {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--color-4);
+  flex-wrap: nowrap;
+}
+
+.subtotal * {
+  font-family: "Montserrat", sans-serif;
+}
+
+.message p {
+  font-size: 14px;
+  color: #cccccc;
+}
+
+.btn-buy {
+  padding: 15px 25px;
+  border: 2px solid transparent;
+  border-radius: 7px;
+  background: var(--color-black);
+  color: var(--color-white);
+  font-family: "Work Sans", sans-serif;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s;
+  /*box-shadow: 0px 6px 0px 0px var(--color-black),
+    0px 12px 0px 0px rgba(128 128 128 / 17%);*/
+  flex-grow: 1;
+  //width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-wrap: nowrap;
+  font-size: 2.2rem;
+  background: color-mix(in srgb, #feca57 25%, transparent);
+  color: color-mix(in srgb, #feca57 100%, transparent);
+}

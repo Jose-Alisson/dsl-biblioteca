@@ -1,0 +1,66 @@
+.cep-form{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+
+  button{
+    border-radius: 7px;
+    padding: 10px 15px;
+    border: 2px solid #feca57;
+    background: transparent;
+    transition: 0.2s;
+    color: #feca57;
+
+    &:hover{
+      background: #feca57;
+      color: #060606;
+    }
+  }
+}
+
+
+.box-field {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.field {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+}
+
+.field input, .field textarea {
+  border-radius: 7px;
+  padding: 10px 45px 10px 15px;
+  border: 0px;
+  outline: none;
+  box-shadow: 0px 0px 0px 1px rgba(0 0 0 / 17%);
+  background: rgba(245 245 245 / 17%);
+  transition: 0.2s;
+  font-family: 'Work Sans', sans-serif;
+  color: var(--color-black);
+
+  &:focus {
+    box-shadow: 0 -1px #0000000a, 0 2px 4px #00000040,
+      0 0 0 3px rgba(254 202 87 / 0.5);
+  }
+}
+
+.field input::placeholder {
+  color: #dcdcdc;
+}
+
+.field i {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translate(-50%, -50%);
+  color: #dcdcdc;
+}
+
+.validate {
+  color: #feca57;
+  font-size: 1.2rem;
+}

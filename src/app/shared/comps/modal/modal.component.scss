@@ -1,0 +1,43 @@
+.modal-header {
+    font-size: 1.8rem;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    color: black;
+    align-items: center;
+    gap: 30px;
+}
+
+.close {
+    color: black;
+    font-size: 48px;
+}
+
+.fade {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    transition: 0.2s;
+    backdrop-filter: blur(5px);
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+}
+
+.modal {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    overflow-y: auto;
+    position: fixed;
+    background: white;
+    transition: 0.2s;
+    max-height: 90vh;
+    z-index: 1;
+    width: 500px;
+
+    &::-webkit-scrollbar {
+        height: 3px;
+        width: 3px;
+    }
+}

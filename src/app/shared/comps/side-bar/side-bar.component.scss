@@ -1,0 +1,67 @@
+.side-header{
+  font-size: 48px;
+  padding: 15px;
+}
+
+.close{
+  color: white;
+}
+
+.fade{
+  position: fixed;
+  width: 100%;
+  top: 0;
+  transition: 0.2s;
+  backdrop-filter: blur(5px);
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1;
+}
+
+.side-bar{
+  top: 0;
+  overflow-y: auto;
+  max-height: 100vh;
+  position: fixed;
+  height: 100%;
+  background: #060606;
+  transition: 0.2s;
+  z-index: 1;
+
+  &::-webkit-scrollbar{
+    height: 3px;
+    width: 3px;
+  }
+}
+
+
+@keyframes slide-right {
+  from{
+    transform: translateX(100%);
+  }
+
+  to{
+    transform: translateX(0%);
+  }
+}
+
+
+@keyframes slide-left {
+  from{
+    transform: translateX(-100%);
+  }
+
+  to{
+    transform: translateX(0%);
+  }
+}
+
+.side-bar.left {
+  left: 0;
+  animation: 0.2s slide-left;
+}
+
+.side-bar.right {
+  right: 0;
+  animation: 0.2s slide-right;
+}

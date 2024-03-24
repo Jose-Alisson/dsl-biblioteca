@@ -1,0 +1,69 @@
+<app-modal [title]="'Cadastar novo livro'" #modal>
+  <div class="modal-content">
+    <ng-container *ngTemplateOutlet="formulario"></ng-container>
+    <br>
+    <button class="btn destaque" (click)="cadastrarLivro()">Cadastrar</button>
+  </div>
+</app-modal>
+
+<app-modal [title]="'Editar livro'" #modalEdt>
+  <div class="modal-content">
+    <ng-container *ngTemplateOutlet="formulario"></ng-container>
+    <input type="hidden" name="" #codigo>
+    <br>
+    <button class="btn destaque"
+      (click)="codigo.value = (livroForm.controls.codigo.value ?? ''); editarLivro(codigo.value)">Editar</button>
+  </div>
+</app-modal>
+
+<section class="menu">
+  <div class="side-left">
+    <button class="btn" (click)="limparForm(); modal.setActive(true)">Cadastrar livro</button>
+    <div class="livros">
+      @for (item of livros$ | async; track $index) {
+      <div class="livro" (click)="livroE = item">
+        {{item?.titulo}}
+      </div>
+      }
+    </div>
+  </div>
+  <div class="side-right">
+    @if (livroE) {
+    <h1>{{livroE?.titulo}}</h1>
+    <h3>Gênero - {{livroE?.genero}}</h3>
+    <h3>Codigo - {{livroE?.codigo}}</h3>
+    <button class="btn edt btn-l" (click)="setValuesModal(); modalEdt.setActive(true)">Editar Livro</button>
+    <button class="btn dlt btn-l" (click)="deletarLivro(livroE?.codigo)">Deletar Livro</button>
+    }
+    @else {
+    <div class="not-selected">
+      <img src="../../../assets/Book lover-bro.svg" alt="">
+      <h1>Nenhum Livro Selecionado</h1>
+    </div>
+    }
+
+  </div>
+</section>
+
+<ng-template #formulario>
+  <div class="fields" [formGroup]="livroForm">
+    <div class="field">
+      <label for="titulo">Titulo</label>
+      <div class="box">
+        <input id="titulo" type="text" placeholder="Titulo" formControlName="titulo">
+      </div>
+    </div>
+    <div class="field">
+      <label for="genero">Gênero</label>
+      <div class="box">
+        <input id="genero" type="text" placeholder="Gênero" formControlName="genero">
+      </div>
+    </div>
+    <div class="field">
+      <label for="codigo">Código</label>
+      <div class="box">
+        <input id="codigo" type="text" placeholder="Código" formControlName="codigo">
+      </div>
+    </div>
+  </div>
+</ng-template>

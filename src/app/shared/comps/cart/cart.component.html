@@ -1,0 +1,50 @@
+<app-side-bar #side [side]="'right'">
+  <div class="content">
+    <div class="list-items">
+      @for(item of [1,2,3]; track $index){
+      <div class="item-product">
+        <div class="item-view">
+          <img src="../../../../assets/20-2.png" />
+        </div>
+        <div class="item-description">
+          <h3>{{ "Product" }}</h3>
+          <p>{{ "description" }}</p>
+          <div class="unique">
+            <h4>{{ 0 | currency : "BRL" : "symbol-narrow" }}</h4>
+            <div class="amount">
+              <div class="decrement" (click)="({})">
+                <i class="fi fi-rr-caret-left"></i>
+              </div>
+              <div class="counter">
+                <p>{{ 1 }}</p>
+              </div>
+              <div class="increment" (click)="({})">
+                <i class="fi fi-rr-caret-right"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      }
+    </div>
+    <div
+      style="
+        padding: 0em 1em 1em 1em;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      "
+    >
+      <div class="subtotal">
+        <div class="message">
+          <span>Sub-Total</span>
+          <p>{{ 0 }} {{ "item" }}</p>
+        </div>
+        <div class="value">
+          <h3>{{ 0 | currency : "BRL" : "symbol-narrow" }}</h3>
+        </div>
+      </div>
+      <button class="btn-buy" (click)="(0)">Comprar</button>
+    </div>
+  </div>
+</app-side-bar>

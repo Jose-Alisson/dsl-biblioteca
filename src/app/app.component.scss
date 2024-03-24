@@ -1,0 +1,473 @@
+// @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Montserrat:ital,wght@0,400;0,700;1,400;1,700&family=Roboto:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Ubuntu:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&family=Work+Sans:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&display=swap');
+
+// :root {
+//   --color-primary: #fffff;
+//   --color-second: #fffff;
+// }
+
+// i {
+//   display: flex;
+//   align-items: center;
+// }
+
+// * {
+//   box-sizing: border-box;
+//   font-family: "Work Sans", sans-serif;
+// }
+
+// header {
+//   background: #060606;
+// }
+
+// header nav {
+//   width: 90%;
+//   margin: auto;
+//   display: flex;
+//   justify-content: space-between;
+//   align-items: center;
+
+//   color: white;
+
+//   height: 70px;
+
+//   .establisment {
+//     display: flex;
+//     align-items: center;
+//     gap: 15px;
+//   }
+
+//   .image-text {
+//     display: flex;
+//     gap: 3px;
+//     overflow: hidden;
+//     align-items: center;
+//   }
+
+//   .image {
+//     min-width: 50px;
+//     min-height: 50px;
+//     border-radius: 100%;
+
+//     img {
+//       width: 50px;
+//       height: 50px;
+//     }
+//   }
+
+//   .text {
+//     font-size: 16px;
+//     font-weight: 600;
+//     white-space: nowrap;
+//   }
+
+//   .header-text {
+//     display: flex;
+//     flex-direction: column;
+//     transition: 0.2s ease;
+//   }
+
+//   ul {
+//     display: flex;
+//     gap: 25px;
+//     list-style: none;
+
+//     li {
+//       font-size: 1.8rem;
+//       cursor: pointer;
+//     }
+//   }
+
+//   .nav-actions {
+//     display: flex;
+//     gap: 20px;
+//     font-size: 2.2rem;
+
+//     .action {
+//       transition: 0.2s;
+//       padding: 10px;
+//       border-radius: 50%;
+
+//       &:hover {
+//         background: #181818;
+//       }
+//     }
+
+//     .lupa,
+//     .menu {
+//       display: none;
+//     }
+//   }
+
+//   .search {
+//     position: relative;
+
+//     .icon {
+//       position: absolute;
+//       top: 50%;
+//       transform: translateY(-50%);
+//       left: 8px;
+//       font-size: 18px;
+//     }
+
+//     input {
+//       outline: none;
+//       background: #181818;
+//       border: 0;
+//       border-radius: 20px;
+//       padding: 10px 5px 10px 35px;
+//       color: white;
+//       font-family: "Work Sans", sans-serif;
+//       font-size: 18px;
+//       font-weight: 500;
+//     }
+//   }
+// }
+
+// h1,
+// h2,
+// h3,
+// h4,
+// h5,
+// h6 {
+//   font-family: "Montserrat", sans-serif;
+// }
+
+// section {
+//   display: flex;
+//   flex-direction: column;
+//   align-items: center;
+//   justify-content: center;
+//   gap: 1em;
+//   padding: 2em;
+//   background: #060606;
+//   color: white;
+
+//   & > h1 {
+//     width: fit-content;
+//     text-align: center;
+//   }
+// }
+
+// ul {
+//   padding: 0;
+// }
+
+// section:not(.banner) {
+//   & > * {
+//     max-width: 800px;
+//   }
+// }
+
+// .banner {
+//   flex-direction: row;
+//   justify-content: center;
+//   flex-wrap: wrap;
+//   margin: 0;
+//   background: rgba(0, 0, 0, 0.5) url(../assets/pizza\ e\ fogo.jpg);
+//   background-blend-mode: darken;
+//   background-repeat: no-repeat;
+//   background-size: cover;
+//   background-position: center;
+//   color: white;
+
+//   .side-left {
+//     max-width: 600px;
+//   }
+
+//   .side-right {
+//     max-width: 800px;
+//     flex-grow: 1;
+
+//     img {
+//       width: 100%;
+//     }
+//   }
+// }
+
+// .marked-darken {
+//   background: #feca57;
+//   color: #060606;
+// }
+
+// .marked-light {
+//   background: #feca57;
+//   color: white;
+// }
+
+// .how-request {
+//   background: #feca57;
+// }
+
+// .how-request ul {
+//   display: flex;
+//   flex-direction: column;
+//   list-style: none;
+//   gap: 15px;
+
+//   li {
+//     display: flex;
+//     align-items: center;
+//     gap: 30px;
+
+//     span {
+//       position: relative;
+//       background: #060606;
+//       color: white;
+//       min-height: 35px;
+//       height: 35px;
+//       min-width: 37px;
+//       width: 37px;
+//       display: flex;
+//       border-radius: 100%;
+//       flex-direction: column;
+//       justify-content: center;
+//       align-items: center;
+//     }
+
+//     p {
+//       background: white;
+//       color: #060606;
+//       border-radius: 7px;
+//       padding: 10px;
+//       box-shadow: 0px 2px 5px 2px rgba(128 128 128/ 17%);
+//     }
+//   }
+
+//   li:not(:last-child) span::before {
+//     position: absolute;
+//     content: "";
+//     background: #060606;
+//     width: 5px;
+//     height: 70px;
+//     left: 50%;
+//     transform: translateX(-50%);
+//     top: 45px;
+//   }
+// }
+
+// .menu-slider {
+//   max-width: 100% !important;
+//   position: relative;
+// }
+
+// .menu-slider {
+//   display: grid;
+//   gap: 20px;
+//   max-width: 100%;
+//   width: fit-content;
+//   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+//   justify-content: center;
+//   align-items: center;
+// }
+
+// .card {
+//   display: flex;
+//   flex-direction: column;
+//   border-radius: 12px;
+//   transform: scale(0.9);
+//   transition: 0.1s ease-out;
+//   background: #181818;
+//   box-shadow: 0px 2px 10px 0px rgba(0 0 0/ 34%);
+
+//   .card-preview {
+//     max-height: 220px;
+//     background: linear-gradient(45deg, tomato, #feca57);
+//     border-radius: 12px 12px 0px 0px;
+//     display: flex;
+//     justify-content: center;
+//     padding: 1em;
+
+//     img {
+//       max-width: inherit;
+//       max-height: inherit;
+//       transition: 0.2s ease-in;
+//       object-fit: contain;
+//     }
+//   }
+
+//   .card-content {
+//     padding: 1.5em;
+//     display: flex;
+//     flex-direction: column;
+//     gap: 15px;
+//     justify-content: center;
+//     align-items: center;
+//     text-align: center;
+
+//     .title {
+//       text-transform: capitalize;
+//     }
+
+//     .description {
+//       display: -webkit-box;
+//       -webkit-box-orient: vertical;
+//       overflow: hidden;
+//       -webkit-line-clamp: 3;
+//       text-overflow: ellipsis;
+//       font-size: 1.6rem;
+//     }
+
+//     .btn-buy {
+//       border-radius: 25px;
+//       font-family: "Montserrat", sans-serif;
+//       background: transparent;
+//       font-weight: 700;
+//       padding: 15px 20px;
+//       border: 2px solid tomato;
+//       color: tomato;
+//       width: 100%;
+//       transition: 0.2s ease;
+//       font-size: 1.8rem;
+//     }
+
+//     &:hover {
+//       .btn-buy {
+//         background: tomato;
+//         color: white;
+//       }
+//     }
+//   }
+
+//   * {
+//     margin: 0;
+//   }
+
+//   &:hover {
+//     transform: scale(1) translateY(-15px);
+
+//     .card-preview img {
+//       transform: translateY(-15px);
+//     }
+//   }
+// }
+
+// .menu-slider .slider::-webkit-scrollbar {
+//   height: 0px;
+// }
+
+// @media screen and (max-width: 652px) {
+//   .banner {
+//     .side-right img {
+//       display: none;
+//     }
+//   }
+// }
+
+// .arrow-left:hover,
+// .arrow-right:hover {
+//   opacity: 1;
+// }
+
+// .arrow-left,
+// .arrow-right {
+//   position: absolute;
+//   opacity: 0.5;
+//   top: 0;
+//   left: 0;
+//   z-index: 2;
+//   right: auto;
+//   bottom: 0;
+//   cursor: pointer;
+//   border: 0;
+//   width: 40px;
+//   color: var(--color-4);
+//   font-size: 25px;
+//   transition: all 0.4s;
+//   background: linear-gradient(to right, black, transparent);
+// }
+
+// .arrow-right {
+//   right: 0;
+//   left: auto;
+//   background: linear-gradient(to left, black, transparent);
+// }
+
+// @media screen and (max-width: 652px) {
+//   section:not(.banner) {
+//     padding: 1em;
+//   }
+// }
+
+// @media screen and (max-with: 462px) {
+//   header nav .establisment h3 {
+//     display: none;
+//   }
+// }
+
+// .footer {
+//   padding: 2em;
+//   width: 100%;
+//   display: flex;
+//   flex-direction: column;
+//   align-items: center;
+// }
+
+// .footer {
+//   background: #060606;
+//   color: white;
+//   font-family: "Ubuntu", sans-serif;
+// }
+
+// .footer-content {
+//   width: 90%;
+//   flex-wrap: wrap;
+//   display: flex;
+//   justify-content: space-between;
+//   gap: 20px;
+//   font-size: 18px;
+//   font-family: "Roboto", sans-serif;
+//   text-decoration: none;
+// }
+
+// .text-box.wraper {
+//   display: flex;
+//   gap: 20px;
+//   width: 60%;
+//   flex-wrap: wrap;
+//   justify-content: space-between;
+// }
+
+// .text-box a {
+//   color: white;
+// }
+
+// .box-title {
+//   font-family: "Ubuntu", sans-serif;
+//   font-weight: bold;
+// }
+
+// .text-box ul {
+//   list-style: none;
+// }
+
+// @media screen and (max-width: 955px) {
+//   header nav {
+//     .header-text {
+//       display: none;
+//     }
+//   }
+// }
+
+// @media screen and (max-width: 838px) {
+//   .nav-actions {
+//     .search {
+//       display: none;
+//     }
+
+//     .lupa {
+//       display: block !important;
+//     }
+//   }
+// }
+
+// @media screen and (max-width: 490px) {
+//   header nav ul {
+//     display: none;
+//   }
+
+//   header nav .nav-actions {
+//     .menu {
+//       display: block;
+//     }
+//   }
+// }

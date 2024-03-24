@@ -1,0 +1,30 @@
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    font-size: 1.8rem;
+    background: #181818;
+    border-radius: 7px;
+}
+
+.wrapper-header {
+    padding: 10px 15px;
+    background: #060606;
+    border-radius: 7px;
+    display: flex;
+    color: white;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.wrapper-body {
+    display: none;
+    padding: 2px;
+}
+
+.wrapper.active > .wrapper-header > span:last-child{
+    transform: rotate(180deg);
+}
+
+.wrapper.active > .wrapper-body {
+    display: block;
+}
