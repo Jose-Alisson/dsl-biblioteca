@@ -17,21 +17,42 @@
 <ng-template #formTpt>
   <div class="fields" [formGroup]="alunoForm">
     <div class="field">
-      <label for="nome">Nome</label>
+      <label for="nome">Nome*</label>
       <div class="box">
         <input id="nome" type="text" placeholder="nome" formControlName="nome">
       </div>
-    </div>
-    <div class="field">
-      <label for="matricula">matricula</label>
-      <div class="box">
-        <input id="matricula" type="text" placeholder="matricula" formControlName="matricula">
+      <div class="validate">
+        @if (alunoForm.get('nome')?.hasError('required') && isEntered('nome')) {
+        <div>
+          O campo não pode ser vazio
+        </div>
+        }
       </div>
     </div>
     <div class="field">
-      <label for="turma">Turma</label>
+      <label for="matricula">matricula*</label>
+      <div class="box">
+        <input id="matricula" type="text" placeholder="matricula" formControlName="matricula">
+      </div>
+      <div class="validate">
+        @if (alunoForm.get('matricula')?.hasError('required') && isEntered('matricula')) {
+        <div>
+          O campo não pode ser vazio
+        </div>
+        }
+      </div>
+    </div>
+    <div class="field">
+      <label for="turma">Turma*</label>
       <div class="box">
         <input id="turma" type="text" placeholder="turma" formControlName="turma">
+      </div>
+      <div class="validate">
+        @if (alunoForm.get('turma')?.hasError('required') && isEntered('turma')) {
+        <div>
+          O campo não pode ser vazio
+        </div>
+        }
       </div>
     </div>
     <div class="field">
@@ -39,8 +60,14 @@
       <div class="box">
         <input id="turno" type="text" placeholder="turno" formControlName="turno">
       </div>
+      <div class="validate">
+        @if (alunoForm.get('turno')?.hasError('required') && isEntered('turno')) {
+        <div>
+          O campo não pode ser vazio
+        </div>
+        }
+      </div>
     </div>
-    
   </div>
 </ng-template>
 
@@ -59,11 +86,11 @@
   </div>
   <div class="side-right">
     @if (aluno_) {
-      <h1>{{aluno_?.nome}}</h1>
-      <h3>Turma: {{aluno_?.turma}} - {{aluno_?.turno}}</h3>
-      <h3>Matricula: {{aluno_?.matricula}}</h3>
-      <button class="btn edt btn-l" (click)="setValues(); modalEdit.setActive(true)">Editar</button>
-      <button class="btn dlt btn-l" (click)="delete()">Deletar</button>
+    <h1>{{aluno_?.nome}}</h1>
+    <h3>Turma: {{aluno_?.turma}} - {{aluno_?.turno}}</h3>
+    <h3>Matricula: {{aluno_?.matricula}}</h3>
+    <button class="btn edt btn-l" (click)="setValues(); modalEdit.setActive(true)">Editar</button>
+    <button class="btn dlt btn-l" (click)="delete()">Deletar</button>
     }
     @else {
     <div class="preview">

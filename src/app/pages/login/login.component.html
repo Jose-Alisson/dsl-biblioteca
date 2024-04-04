@@ -1,1 +1,24 @@
-<p>login works!</p>
+
+<div class="logo">
+    <img src="../../../assets/dsl logo.jpg" alt="">
+</div>
+<h4>Faça login na biblioteca DSL</h4>
+<div class="fields" [formGroup]="loginForm">
+    <div class="field">
+        <label for="user">Usuario*</label>
+        <div class="box">
+            <input type="text" name="" id="user" placeholder="Usuario" formControlName="user">
+        </div>
+        <div class="validate">
+        </div>
+    </div>
+    <div class="field">
+        <label for="senha">Senha*</label>
+        <div class="box">
+            <input type="password" name="" id="senha" placeholder="Senha" formControlName="password">
+        </div>
+        <div class="validate">
+        </div>
+    </div>
+</div>
+<button class="btn" (click)="login()">Fazer login</button>

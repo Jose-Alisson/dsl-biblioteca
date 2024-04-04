@@ -34,3 +34,7 @@ export class DashComponent {
     }
   }
 }
+
+export function isEntered(form: FormGroup, controlName: string){
+  return (form.get(controlName)?.touched || form.get(controlName)?.dirty)
+}

@@ -5,6 +5,7 @@ import { Observable, Subject, of } from 'rxjs';
 import { LivroService } from '../../shared/services/livro/livro.service';
 import { ModalComponent } from '../../shared/comps/modal/modal.component';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { isEntered } from '../dash/dash.component';
 
 @Component({
   selector: 'app-menu',
@@ -38,6 +39,8 @@ export class MenuComponent implements OnInit {
     codigo: ["", [Validators.required]]
   })
 
+  private viewAllErrorForm = false
+
   ngOnInit(): void {
     this.end.queryParamMap.subscribe(params => {
       this.searchResult = (params.get('s') ?? '')
@@ -49,21 +52,23 @@ export class MenuComponent implements OnInit {
   cadastrarLivro() {
     if (this.livroForm.valid) {
       this.livrosService.createLivro(this.livroForm.value).subscribe(data => {
-        this.livroForm.setValue({
-          titulo: "",
-          genero: "",
-          codigo: ""
-        })
 
-        if (this.modal) {
-          this.modal.setActive(false)
-          this.limparForm()
-        }
+        console.log("Esta rodando sempre")
+        // this.livros$.subscribe(livros => {
+        //   this.livros$ = new Observable(obs => {
+        //     obs.next([...livros, data])
+        //   })
+        // })
+
+        this.modal?.setActive(false)
+        this.limparForm()
       })
+    } else {
+      this.viewAllErrorForm = true
     }
   }
 
-  setValuesModal(){
+  setValuesModal() {
     this.livroForm.setValue({
       titulo: this.livroE.titulo,
       genero: this.livroE.genero,
@@ -71,7 +76,7 @@ export class MenuComponent implements OnInit {
     })
   }
 
-  limparForm(){
+  limparForm() {
     this.livroForm.setValue({
       titulo: "",
       genero: "",
@@ -79,27 +84,31 @@ export class MenuComponent implements OnInit {
     })
   }
 
-  editarLivro(codigo: string){
-    if(this.livroForm.valid){
-      this.livrosService.updateLivro(codigo, this.livroForm.value).subscribe({next: (data) => {
-        this.livroE = data
+  editarLivro(codigo: string) {
+    if (this.livroForm.valid) {
+      this.livrosService.updateLivro(codigo, this.livroForm.value).subscribe({
+        next: (data) => {
+          this.livroE = data
 
-        this.livros$.subscribe(livros => {
+          this.livros$.subscribe(livros => {
 
-          let index = livros.findIndex(livro => livro.codigo === codigo)
+            let index = livros.findIndex(livro => livro.codigo === codigo)
 
-          if(index != -1){
-            livros[index] = data
-          }
-          
-          this.livros$ = new Observable(obs => {
-            obs.next(livros)
+            if (index != -1) {
+              livros[index] = data
+            }
+
+            this.livros$ = new Observable(obs => {
+              obs.next(livros)
+            })
+
+            this.modalEdt?.setActive(false)
+            this.limparForm()
           })
-
-          this.modalEdt?.setActive(false)
-          this.limparForm()
-        })
-      }})
+        }
+      })
+    } else {
+      this.viewAllErrorForm = true
     }
   }
 
@@ -114,5 +123,9 @@ export class MenuComponent implements OnInit {
         this.livroE = undefined
       }
     })
+  }
+
+  isEntered(controlName: string) {
+    return (isEntered(this.livroForm, controlName) || this.viewAllErrorForm)
   }
 }

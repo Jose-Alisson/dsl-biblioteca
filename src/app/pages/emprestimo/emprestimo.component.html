@@ -16,27 +16,55 @@
 <ng-template #tptEmprest>
     <div class="fields" [formGroup]="emprestForm">
         <div class="field">
-            <label for="titulo">Titulo</label>
+            <label for="titulo">Titulo*</label>
             <div class="box">
                 <input id="titulo" type="text" placeholder="titulo" formControlName="titulo">
             </div>
+            <div class="validate">
+                @if (emprestForm.get('titulo')?.hasError('required') && isEntered('titulo')) {
+                <div>
+                    O campo não pode ser vazio
+                </div>
+                }
+            </div>
         </div>
         <div class="field">
-            <label for="matricula">Matricula do aluno</label>
+            <label for="matricula">Matricula do aluno*</label>
             <div class="box">
                 <input id="matricula" type="text" placeholder="matricula" formControlName="matricula">
             </div>
-        </div>
-        <div class="field">
-            <label for="livros">Livros</label>
-            <div class="box">
-                <input id="livros" type="text" placeholder="Livros" formControlName="livros">
+            <div class="validate">
+                @if (emprestForm.get('matricula')?.hasError('required') && isEntered('matricula')) {
+                <div>
+                    O campo não pode ser vazio
+                </div>
+                }
             </div>
         </div>
         <div class="field">
-            <label for="dateDevolution">Data de devolução</label>
+            <label for="livros">Livros*</label>
+            <div class="box">
+                <input id="livros" type="text" placeholder="Livros" formControlName="livros">
+            </div>
+            <div class="validate">
+                @if (emprestForm.get('livros')?.hasError('required') && isEntered('livros')) {
+                <div>
+                    O campo não pode ser vazio
+                </div>
+                }
+            </div>
+        </div>
+        <div class="field">
+            <label for="dateDevolution">Data de devolução*</label>
             <div class="box">
                 <input id="dateDevolution" type="date" placeholder="data" formControlName="dataDevolucao">
+            </div>
+            <div class="validate">
+                @if (emprestForm.get('dataDevolucao')?.hasError('required') && isEntered('dataDevolucao')) {
+                <div>
+                    O campo não pode ser vazio
+                </div>
+                }
             </div>
         </div>
     </div>

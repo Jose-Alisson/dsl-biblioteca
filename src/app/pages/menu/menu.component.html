@@ -12,7 +12,7 @@
     <input type="hidden" name="" #codigo>
     <br>
     <button class="btn destaque"
-      (click)="codigo.value = (livroForm.controls.codigo.value ?? ''); editarLivro(codigo.value)">Editar</button>
+      (click)="codigo.value = livroE.codigo; editarLivro(codigo.value)">Editar</button>
   </div>
 </app-modal>
 
@@ -48,22 +48,43 @@
 <ng-template #formulario>
   <div class="fields" [formGroup]="livroForm">
     <div class="field">
-      <label for="titulo">Titulo</label>
+      <label for="titulo">Titulo*</label>
       <div class="box">
         <input id="titulo" type="text" placeholder="Titulo" formControlName="titulo">
       </div>
+      <div class="validate">
+        @if (livroForm.get('titulo')?.hasError('required') && isEntered('titulo')) {
+        <div>
+          O campo não pode ser vazio
+        </div>
+        }
+      </div>
     </div>
     <div class="field">
-      <label for="genero">Gênero</label>
+      <label for="genero">Gênero*</label>
       <div class="box">
         <input id="genero" type="text" placeholder="Gênero" formControlName="genero">
       </div>
+      <div class="validate">@if (livroForm.get('genero')?.hasError('required') && isEntered('genero')) {
+        <div>
+          O campo não pode ser vazio
+        </div>
+        }
+      </div>
     </div>
     <div class="field">
-      <label for="codigo">Código</label>
+      <label for="codigo">Código*</label>
       <div class="box">
         <input id="codigo" type="text" placeholder="Código" formControlName="codigo">
       </div>
+      <div class="validate">
+        @if (livroForm.get('codigo')?.hasError('required') && isEntered('codigo')) {
+        <div>
+          O campo não pode ser vazio
+        </div>
+        }
+      </div>
+
     </div>
   </div>
 </ng-template>

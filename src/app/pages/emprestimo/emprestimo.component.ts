@@ -5,6 +5,7 @@ import { AsyncPipe, CommonModule, DatePipe, NgClass, NgTemplateOutlet } from '@a
 import { ModalComponent } from '../../shared/comps/modal/modal.component';
 import { DropdownComponent } from '../../shared/comps/dropdown/dropdown.component';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { isEntered } from '../dash/dash.component';
 
 @Component({
   selector: 'app-emprestimo',
@@ -35,9 +36,11 @@ export class EmprestimoComponent implements OnInit {
   public emprestForm = this.form.group({
     titulo: ["", [Validators.required]],
     matricula: ["", [Validators.required]],
-    livros: ["", []],
+    livros: ["", [Validators.required]],
     dataDevolucao: ["", [Validators.required]]
   })
+
+  private viewAllErrorForm = false
 
   ngOnInit(): void {
     this.emprestService.getEmprestimoOrdenado().subscribe(data => {
@@ -115,6 +118,9 @@ export class EmprestimoComponent implements OnInit {
 
       this.emprestService.create(emprest).subscribe({
         next: (data) => {
+
+          console.log("Está criando toda ora")
+          
           this.emprestService.getEmprestimoOrdenado().subscribe(data => {
             this.estructuct = data
             this.turmas = Object.keys(data).sort((a, b) => this.ordernar(a, b))
@@ -124,6 +130,8 @@ export class EmprestimoComponent implements OnInit {
           this.limparForm()
         }
       })
+    } else {
+      this.viewAllErrorForm = true
     }
   }
 
@@ -143,6 +151,8 @@ export class EmprestimoComponent implements OnInit {
       livros: "",
       dataDevolucao: ""
     })
+
+    this.viewAllErrorForm = false
   }
 
   editar() {
@@ -152,10 +162,6 @@ export class EmprestimoComponent implements OnInit {
       this.emprestForm.controls.livros.value?.split(',').forEach(livro => {
         livros.push({ codigo: livro })
       })
-
-      console.log(this.emprestForm.controls.livros.value)
-
-      console.log(livros)
 
       let emprest = {
         id: this.emprestEscolhi.id,
@@ -180,7 +186,13 @@ export class EmprestimoComponent implements OnInit {
           this.limparForm()
         }
       })
+    } else {
+      this.viewAllErrorForm = true
     }
+  }
+
+  isEntered(controlName: string) {
+    return (isEntered(this.emprestForm, controlName) || this.viewAllErrorForm)
   }
 }
 

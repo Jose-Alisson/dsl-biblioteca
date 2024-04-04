@@ -1,10 +1,11 @@
 import { Component, OnInit, TemplateRef, ViewChild, inject } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Observable, map, of } from 'rxjs';
 import { AlunoService } from '../../shared/services/aluno/aluno.service';
 import { DropdownComponent } from '../../shared/comps/dropdown/dropdown.component';
 import { AsyncPipe, NgTemplateOutlet } from '@angular/common';
 import { ModalComponent } from '../../shared/comps/modal/modal.component';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { isEntered } from '../dash/dash.component';
 
 @Component({
   selector: 'app-alunos',
@@ -39,7 +40,10 @@ export class AlunosComponent implements OnInit {
     turno: ["", [Validators.required]]
   })
 
+  public viewAllErrorForm = false
+
   ngOnInit(): void {
+
     this.alunoService.getAlunos().subscribe(data => {
       this.turmas_ = data
       this.turmas$ = of(Object.keys(data).sort((a, b) => this.ordernar(a, b)))
@@ -80,6 +84,8 @@ export class AlunosComponent implements OnInit {
       turma: "",
       turno: ""
     })
+
+    this.viewAllErrorForm = false
   }
 
   create() {
@@ -93,6 +99,8 @@ export class AlunosComponent implements OnInit {
           this.limparForm()
         })
       })
+    } else {
+      this.viewAllErrorForm = true
     }
   }
 
@@ -109,6 +117,8 @@ export class AlunosComponent implements OnInit {
         this.modalEdit?.setActive(false)
         this.limparForm()
       })
+    } else {
+      this.viewAllErrorForm = true
     }
   }
 
@@ -121,5 +131,9 @@ export class AlunosComponent implements OnInit {
         this.turmas$ = of(Object.keys(data).sort((a, b) => this.ordernar(a, b)))
       })
     })
+  }
+
+  isEntered(controlName: string){
+    return (isEntered(this.alunoForm, controlName) || this.viewAllErrorForm)
   }
 }

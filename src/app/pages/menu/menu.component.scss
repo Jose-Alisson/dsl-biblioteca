@@ -4,6 +4,7 @@
 
 section.menu {
   display: flex;
+  flex-wrap: wrap;
   //background: #060606;
   //color: white;
 
@@ -12,6 +13,7 @@ section.menu {
     max-width: 350px;
     display: flex;
     padding: 5px;
+    flex-grow: 1;
     flex-direction: column;
   }
 
@@ -172,4 +174,21 @@ section.menu {
 
 .edt{
   color: #feca57;
+}
+
+.validate{
+  font-size: 1.6rem;
+  color: tomato;
+}
+
+@media screen and (max-width: 550px) {
+  
+  .side-left {
+    max-width: none !important;
+    min-width: 250px !important;
+  }
+
+  .not-selected img{
+    width: auto;
+  }
 }

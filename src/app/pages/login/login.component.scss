@@ -1,0 +1,27 @@
+:host{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.logo{
+    overflow: hidden;
+    width: 70px;
+    height: 70px;
+    border-radius: 100%;
+    margin: auto;
+
+    img{
+        width: 70px;
+        height: 70px;
+    }
+}
+
+
+.btn{
+    background: #060606;
+    border: 0;
+    padding: 15px 25px;
+    border-radius: 7px;
+    color: white;
+}
