@@ -86,11 +86,18 @@
   </div>
   <div class="side-right">
     @if (aluno_) {
-    <h1>{{aluno_?.nome}}</h1>
-    <h3>Turma: {{aluno_?.turma}} - {{aluno_?.turno}}</h3>
-    <h3>Matricula: {{aluno_?.matricula}}</h3>
-    <button class="btn edt btn-l" (click)="setValues(); modalEdit.setActive(true)">Editar</button>
-    <button class="btn dlt btn-l" (click)="delete()">Deletar</button>
+
+    <div class="card">
+      <h2>{{aluno_?.nome}}</h2>
+      <h4>Turma: {{aluno_?.turma}} - {{aluno_?.turno}}</h4>
+      <h4>Matricula: {{aluno_?.matricula}}</h4>
+      <div class="buttons">
+        <button class="btn edt btn-l" (click)="setValues(); modalEdit.setActive(true)">Editar</button>
+        <button class="btn dlt btn-l" (click)="delete()">Deletar</button>
+      </div>
+
+    </div>
+
     }
     @else {
     <div class="preview">

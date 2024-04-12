@@ -26,7 +26,7 @@ app-side-bar ul {
 }
 
 header {
-  background: #060606;
+  background: aquamarine;
 }
 
 header > span {
@@ -36,7 +36,8 @@ header > span {
   flex-direction: row-reverse;
   justify-content: space-between;
   margin: auto;
-  color: white;
+  color: black;
+  font-weight: 700;
 
   * {
     margin: 0;
@@ -58,7 +59,7 @@ header nav {
   justify-content: space-between;
   align-items: center;
 
-  color: white;
+  color: black;
 
   height: 70px;
 

@@ -54,11 +54,11 @@ export class MenuComponent implements OnInit {
       this.livrosService.createLivro(this.livroForm.value).subscribe(data => {
 
         console.log("Esta rodando sempre")
-        // this.livros$.subscribe(livros => {
-        //   this.livros$ = new Observable(obs => {
-        //     obs.next([...livros, data])
-        //   })
-        // })
+        this.livros$.subscribe(livros => {
+          this.livros$ = new Observable(obs => {
+            obs.next([...livros])
+          })
+        })
 
         this.modal?.setActive(false)
         this.limparForm()
