@@ -6,11 +6,12 @@ import { ModalComponent } from '../../shared/comps/modal/modal.component';
 import { DropdownComponent } from '../../shared/comps/dropdown/dropdown.component';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { isEntered } from '../dash/dash.component';
+import { SideBarComponent } from '../../shared/comps/side-bar/side-bar.component';
 
 @Component({
   selector: 'app-emprestimo',
   standalone: true,
-  imports: [AsyncPipe, DatePipe, CommonModule, ModalComponent, DropdownComponent, NgTemplateOutlet, ReactiveFormsModule],
+  imports: [AsyncPipe, DatePipe, CommonModule, ModalComponent, DropdownComponent, NgTemplateOutlet, ReactiveFormsModule, SideBarComponent],
   templateUrl: './emprestimo.component.html',
   styleUrl: './emprestimo.component.scss'
 })

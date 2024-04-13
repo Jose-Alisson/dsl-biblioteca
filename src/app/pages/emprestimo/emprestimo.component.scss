@@ -96,6 +96,7 @@ section.aluno {
     width: 100%;
     height: 100%;
     display: flex;
+    text-align: center;
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -112,19 +113,49 @@ section.aluno {
     --color-border: transparent;
 }
 
-.validate{
+.validate {
     font-size: 1.6rem;
     color: tomato;
 }
 
+.more {
+    padding: 10px;
+    a {
+        display: block;
+        width: fit-content;
+        padding: 10px 15px;
+        border-radius: 7px;
+        transition: 0.2s;
+        box-shadow: 0px 2px 10px rgba(128 128 128 / 32%);
+
+        &:hover {
+            background: #eeeeee;
+        }
+    }
+}
+
 @media screen and (max-width: 550px) {
-  
+
+    .more {
+        display: block !important;
+    }
+
     .side-left {
-      max-width: none !important;
-      min-width: 250px !important;
+        max-width: none !important;
+        min-width: 250px !important;
     }
-  
-    .preview img{
-      width: auto;
+
+    .preview img {
+        width: auto;
     }
-  }
+}
+
+.side-left {
+    min-width: 350px;
+    max-width: 350px;
+    padding: 5px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}

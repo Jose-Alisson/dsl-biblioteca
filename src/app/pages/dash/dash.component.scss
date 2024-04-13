@@ -26,7 +26,8 @@ app-side-bar ul {
 }
 
 header {
-  background: aquamarine;
+  background: white;
+  box-shadow: 0px 2px 10px rgba(128  128 128 / 32%);
 }
 
 header > span {
@@ -157,11 +158,11 @@ header nav {
 }
 
 @media screen and (max-width: 955px) {
-  header nav {
-    .header-text {
-      display: none;
-    }
-  }
+  // header nav {
+  //   .header-text {
+  //     display: none;
+  //   }
+  // }
 }
 
 @media screen and (max-width: 838px) {

@@ -1,3 +1,27 @@
+<ng-template #sideLeft>
+    <div class="side-left">
+        <button class="btn" (click)="modalCreate.setActive(true)">Cadastrar emprestimo</button>
+        @for (turma of getTurmas(); track $index) {
+        <app-dropdown [title]="turma">
+            @for (aluno of alunosByTurma(turma); track $index) {
+            <app-dropdown [title]="aluno">
+                <ul class="ler">
+                    @for (emprest of getEmprestimoByAluno(turma, aluno) | async; track $index) {
+                    <li class="emprest-row" [ngClass]="statusEmprestimo(emprest)" (click)="emprestEscolhi = emprest">
+                        {{emprest.titulo}}</li>
+                    }
+                </ul>
+            </app-dropdown>
+            }
+        </app-dropdown>
+        }
+    </div>
+</ng-template>
+
+<app-side-bar #side [side]="'left'">
+    <ng-container [ngTemplateOutlet]="sideLeft"></ng-container>
+</app-side-bar>
+
 <app-modal [title]="'Criar emprestimo'" #modalCreate>
     <div class="modal-content">
         <ng-container *ngTemplateOutlet="tptEmprest"></ng-container>
@@ -71,23 +95,9 @@
 </ng-template>
 
 <section class="emprest">
-    <div class="side-left">
-        <button class="btn" (click)="modalCreate.setActive(true)">Cadastrar emprestimo</button>
-        @for (turma of getTurmas(); track $index) {
-        <app-dropdown [title]="turma">
-            @for (aluno of alunosByTurma(turma); track $index) {
-            <app-dropdown [title]="aluno">
-                <ul class="ler">
-                    @for (emprest of getEmprestimoByAluno(turma, aluno) | async; track $index) {
-                    <li class="emprest-row" [ngClass]="statusEmprestimo(emprest)" (click)="emprestEscolhi = emprest">
-                        {{emprest.titulo}}</li>
-                    }
-                </ul>
-            </app-dropdown>
-            }
-        </app-dropdown>
-        }
-    </div>
+    <div class="more">
+        <a (click)="side.toogleActive()"><i class="fi fi-rr-menu-dots"></i></a>
+      </div>
     <div class="side-right">
         @if (emprestEscolhi) {
         <h1>{{emprestEscolhi?.titulo}}</h1>
@@ -118,7 +128,7 @@
         }@else {
         <div class="preview">
             <img src="../../../assets/Library-pana.svg" alt="">
-            <h2>Nenhum emprestimo selecionado</h2>
+            <h2>Nenhum Emprestimo Selecionado</h2>
         </div>
         }
     </div>

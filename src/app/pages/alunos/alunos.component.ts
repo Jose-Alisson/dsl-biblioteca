@@ -6,11 +6,12 @@ import { AsyncPipe, NgTemplateOutlet } from '@angular/common';
 import { ModalComponent } from '../../shared/comps/modal/modal.component';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { isEntered } from '../dash/dash.component';
+import { SideBarComponent } from '../../shared/comps/side-bar/side-bar.component';
 
 @Component({
   selector: 'app-alunos',
   standalone: true,
-  imports: [DropdownComponent, AsyncPipe, ModalComponent, ReactiveFormsModule, NgTemplateOutlet],
+  imports: [DropdownComponent, AsyncPipe, ModalComponent, ReactiveFormsModule, NgTemplateOutlet, SideBarComponent],
   templateUrl: './alunos.component.html',
   styleUrl: './alunos.component.scss'
 })

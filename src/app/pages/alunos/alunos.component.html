@@ -1,3 +1,8 @@
+<app-side-bar [side]="'left'" #side>
+  <ng-container [ngTemplateOutlet]="sideLeft"></ng-container>
+</app-side-bar>
+
+
 <app-modal [title]="'Criar aluno'" #modalCreate>
   <div class="modal-content">
     <ng-container *ngTemplateOutlet="formTpt"></ng-container>
@@ -14,6 +19,22 @@
   </div>
 </app-modal>
 
+
+<ng-template #sideLeft>
+  <div class="side-left">
+    <button class="btn" (click)="limparForm();modalCreate.setActive(true)">Cadastrar aluno</button>
+    @for (turma of turmas$ | async; track $index) {
+    <app-dropdown [title]="turma">
+      <ul class="ler">
+        @for (aluno of getAlunosByTurma(turma) ; track $index) {
+        <li class="emprest-row" (click)="aluno_ = aluno">{{aluno.nome}}</li>
+        }
+      </ul>
+    </app-dropdown>
+    }
+  </div>
+
+</ng-template>
 <ng-template #formTpt>
   <div class="fields" [formGroup]="alunoForm">
     <div class="field">
@@ -72,21 +93,11 @@
 </ng-template>
 
 <section class="aluno">
-  <div class="side-left">
-    <button class="btn" (click)="limparForm();modalCreate.setActive(true)">Cadastrar aluno</button>
-    @for (turma of turmas$ | async; track $index) {
-    <app-dropdown [title]="turma">
-      <ul class="ler">
-        @for (aluno of getAlunosByTurma(turma) ; track $index) {
-        <li class="emprest-row" (click)="aluno_ = aluno">{{aluno.nome}}</li>
-        }
-      </ul>
-    </app-dropdown>
-    }
+    <div class="more">
+      <a (click)="side.toogleActive()"><i class="fi fi-rr-menu-dots"></i></a>
   </div>
   <div class="side-right">
     @if (aluno_) {
-
     <div class="card">
       <h2>{{aluno_?.nome}}</h2>
       <h4>Turma: {{aluno_?.turma}} - {{aluno_?.turno}}</h4>
@@ -102,7 +113,7 @@
     @else {
     <div class="preview">
       <img src="../../../assets/Students-bro.svg" alt="">
-      <h2>Nenhum aluno selecionado</h2>
+      <h2>Nenhum Aluno Selecionado</h2>
     </div>
     }
   </div>
