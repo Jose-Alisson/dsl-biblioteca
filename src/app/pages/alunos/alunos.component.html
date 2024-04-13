@@ -27,7 +27,7 @@
     <app-dropdown [title]="turma">
       <ul class="ler">
         @for (aluno of getAlunosByTurma(turma) ; track $index) {
-        <li class="emprest-row" (click)="aluno_ = aluno">{{aluno.nome}}</li>
+        <li class="emprest-row" (click)="aluno_ = aluno; side.active = false">{{aluno.nome}}</li>
         }
       </ul>
     </app-dropdown>

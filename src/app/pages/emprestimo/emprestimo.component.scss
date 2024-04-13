@@ -5,7 +5,8 @@
 section.emprest,
 section.aluno {
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
+    //flex-wrap: wrap;
     //background: #060606;
     // color: white;
 
@@ -120,6 +121,8 @@ section.aluno {
 
 .more {
     padding: 10px;
+    border-bottom: 1px solid #eeee;
+
     a {
         display: block;
         width: fit-content;
