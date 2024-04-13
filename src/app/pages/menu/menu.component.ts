@@ -6,11 +6,12 @@ import { LivroService } from '../../shared/services/livro/livro.service';
 import { ModalComponent } from '../../shared/comps/modal/modal.component';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { isEntered } from '../dash/dash.component';
+import { SideBarComponent } from '../../shared/comps/side-bar/side-bar.component';
 
 @Component({
   selector: 'app-menu',
   standalone: true,
-  imports: [CurrencyPipe, RouterLink, AsyncPipe, ModalComponent, ReactiveFormsModule, NgTemplateOutlet],
+  imports: [CurrencyPipe, RouterLink, AsyncPipe, ModalComponent, ReactiveFormsModule, NgTemplateOutlet, SideBarComponent],
   templateUrl: './menu.component.html',
   styleUrl: './menu.component.scss',
 })

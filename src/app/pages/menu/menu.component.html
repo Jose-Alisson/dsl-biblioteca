@@ -1,3 +1,21 @@
+
+<ng-template #sideLeft>
+  <div class="side-left">
+    <button class="btn" (click)="limparForm(); modal.setActive(true)">Cadastrar livro</button>
+    <div class="livros">
+      @for (item of livros$ | async; track $index) {
+      <div class="livro" (click)="livroE = item; side.active = false">
+        {{item?.titulo}}
+      </div>
+      }
+    </div>
+  </div>
+</ng-template>
+
+<app-side-bar #side>
+  <ng-template [ngTemplateOutlet]="sideLeft"></ng-template>
+</app-side-bar>
+
 <app-modal [title]="'Cadastar novo livro'" #modal>
   <div class="modal-content">
     <ng-container *ngTemplateOutlet="formulario"></ng-container>
@@ -16,15 +34,8 @@
 </app-modal>
 
 <section class="menu">
-  <div class="side-left">
-    <button class="btn" (click)="limparForm(); modal.setActive(true)">Cadastrar livro</button>
-    <div class="livros">
-      @for (item of livros$ | async; track $index) {
-      <div class="livro" (click)="livroE = item">
-        {{item?.titulo}}
-      </div>
-      }
-    </div>
+  <div class="more">
+    <a (click)="side.toogleActive()">Mais <i class="fi fi-rr-menu-dots"></i></a>
   </div>
   <div class="side-right">
     @if (livroE) {

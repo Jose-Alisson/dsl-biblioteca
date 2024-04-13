@@ -7,7 +7,7 @@
             <app-dropdown [title]="aluno">
                 <ul class="ler">
                     @for (emprest of getEmprestimoByAluno(turma, aluno) | async; track $index) {
-                    <li class="emprest-row" [ngClass]="statusEmprestimo(emprest)" (click)="emprestEscolhi = emprest">
+                    <li class="emprest-row" [ngClass]="statusEmprestimo(emprest)" (click)="emprestEscolhi = emprest; side.active = false">
                         {{emprest.titulo}}</li>
                     }
                 </ul>
@@ -96,7 +96,7 @@
 
 <section class="emprest">
     <div class="more">
-        <a (click)="side.toogleActive()"><i class="fi fi-rr-menu-dots"></i></a>
+        <a (click)="side.toogleActive()">Mais<i class="fi fi-rr-menu-dots"></i></a>
       </div>
     <div class="side-right">
         @if (emprestEscolhi) {

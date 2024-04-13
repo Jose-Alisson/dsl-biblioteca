@@ -127,12 +127,15 @@ section.aluno {
         display: block;
         width: fit-content;
         padding: 10px 15px;
-        border-radius: 7px;
         transition: 0.2s;
-        box-shadow: 0px 2px 10px rgba(128 128 128 / 32%);
+        background: #060606;
+        color: white;
+        display: flex;
+        gap: 10px;
+        align-items: center;
 
         &:hover {
-            background: #eeeeee;
+            color: aquamarine;
         }
     }
 }
