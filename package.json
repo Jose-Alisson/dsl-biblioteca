@@ -7,7 +7,7 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "serve:ssr:PS-Angular": "node dist/ps-angular/server/server.mjs"
+    "serve:ssr:PS-Angular": "node dist/Biblioteca-DSL-Angular/server/server.mjs"
   },
   "engines": {
     "node": "20.11.0",
@@ -27,6 +27,7 @@
     "@angular/ssr": "^17.1.2",
     "express": "^4.18.2",
     "ngx-mask": "^17.0.4",
+    "ngx-toastr": "^18.0.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.3"

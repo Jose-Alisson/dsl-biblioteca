@@ -150,6 +150,9 @@ section.menu {
   --color-primary: rgba(128 128 128 / 17%);
   --color-secondy: black;
   --color-border: transparent;
+  --color-background:white;
+  display: flex;
+  flex-direction: column;
 }
 
 .not-selected {
@@ -214,6 +217,9 @@ section.menu {
 .more {
   padding: 10px;
   border-bottom: 1px solid #eeee;
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
 
   a {
       display: block;

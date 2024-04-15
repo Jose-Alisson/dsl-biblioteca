@@ -22,7 +22,7 @@
 
 <ng-template #sideLeft>
   <div class="side-left">
-    <button class="btn" (click)="limparForm();modalCreate.setActive(true)">Cadastrar aluno</button>
+    <!-- <button class="btn" (click)="limparForm();modalCreate.setActive(true)">Cadastrar aluno</button> -->
     @for (turma of turmas$ | async; track $index) {
     <app-dropdown [title]="turma">
       <ul class="ler">
@@ -37,54 +37,64 @@
 </ng-template>
 <ng-template #formTpt>
   <div class="fields" [formGroup]="alunoForm">
-    <div class="field">
-      <label for="nome">Nome*</label>
-      <div class="box">
+    <div class="box">
+      <div class="box-field">
         <input id="nome" type="text" placeholder="nome" formControlName="nome">
+        <label for="nome">Nome*</label>
       </div>
       <div class="validate">
         @if (alunoForm.get('nome')?.hasError('required') && isEntered('nome')) {
         <div>
-          O campo não pode ser vazio
+          <i class="fi fi-rr-exclamation"></i> O campo não pode ser vazio
         </div>
         }
       </div>
     </div>
-    <div class="field">
-      <label for="matricula">matricula*</label>
-      <div class="box">
+    <div class="box">
+      <div class="box-field">
         <input id="matricula" type="text" placeholder="matricula" formControlName="matricula">
+        <label for="matricula">matricula*</label>
       </div>
       <div class="validate">
         @if (alunoForm.get('matricula')?.hasError('required') && isEntered('matricula')) {
         <div>
-          O campo não pode ser vazio
+          <i class="fi fi-rr-exclamation"></i> O campo não pode ser vazio
         </div>
         }
+
+        @if(alunoForm.get('matricula')?.hasError('matriculaEquals') && isEntered('matricula')){
+          <div>
+            <i class="fi fi-rr-exclamation"></i> Aluno já existe com essa matricula
+          </div>
+        }
+          
       </div>
     </div>
-    <div class="field">
-      <label for="turma">Turma*</label>
-      <div class="box">
+    <div class="box">
+      <div class="box-field">
         <input id="turma" type="text" placeholder="turma" formControlName="turma">
+        <label for="turma">Turma*</label>
       </div>
       <div class="validate">
         @if (alunoForm.get('turma')?.hasError('required') && isEntered('turma')) {
         <div>
-          O campo não pode ser vazio
+          <i class="fi fi-rr-exclamation"></i> O campo não pode ser vazio
         </div>
         }
+
+        
       </div>
     </div>
-    <div class="field">
-      <label for="turno">Turno</label>
-      <div class="box">
+    <div class="box">
+      
+      <div class="box-field">
         <input id="turno" type="text" placeholder="turno" formControlName="turno">
+        <label for="turno">Turno</label>
       </div>
       <div class="validate">
         @if (alunoForm.get('turno')?.hasError('required') && isEntered('turno')) {
         <div>
-          O campo não pode ser vazio
+          <i class="fi fi-rr-exclamation"></i> O campo não pode ser vazio
         </div>
         }
       </div>
@@ -94,7 +104,8 @@
 
 <section class="aluno">
     <div class="more">
-      <a (click)="side.toogleActive()">Mais <i class="fi fi-rr-menu-dots"></i></a>
+      <a (click)="side.toogleActive()">Selecionar</a>
+      <a (click)="limparForm(); modalCreate.toogleActive()">Cadastrar</a>
   </div>
   <div class="side-right">
     @if (aluno_) {

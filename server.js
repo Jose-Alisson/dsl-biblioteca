@@ -1,10 +1,10 @@
 const express = require('express')
 const app = express()
 
-app.use(express.static(__dirname + "/dist/ps-angular"))
+app.use(express.static(__dirname + "/dist/Biblioteca-DSL-Angular"))
 
 app.get("/**", (req, res) => {
-  res.sendFile(__dirname + "/dist/ps-angular/server/index.html")
+  res.sendFile(__dirname + "/dist/Biblioteca-DSL-Angular/server/index.html")
 })
 
 const port = process.env.PORT || 4202

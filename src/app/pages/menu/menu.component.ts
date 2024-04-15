@@ -7,6 +7,8 @@ import { ModalComponent } from '../../shared/comps/modal/modal.component';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { isEntered } from '../dash/dash.component';
 import { SideBarComponent } from '../../shared/comps/side-bar/side-bar.component';
+import { HttpErrorResponse } from '@angular/common/http';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-menu',
@@ -34,6 +36,8 @@ export class MenuComponent implements OnInit {
   @ViewChild("formulario")
   public formularioTpt?: TemplateRef<any>
 
+  private toast =  inject(ToastrService)
+
   public livroForm = this.form.group({
     titulo: ["", [Validators.required]],
     genero: ["", [Validators.required]],
@@ -52,7 +56,7 @@ export class MenuComponent implements OnInit {
 
   cadastrarLivro() {
     if (this.livroForm.valid) {
-      this.livrosService.createLivro(this.livroForm.value).subscribe(data => {
+      this.livrosService.createLivro(this.livroForm.value).subscribe({next:(data) => {
 
         console.log("Esta rodando sempre")
         this.livros$.subscribe(livros => {
@@ -63,7 +67,18 @@ export class MenuComponent implements OnInit {
 
         this.modal?.setActive(false)
         this.limparForm()
-      })
+      }, error:(err:HttpErrorResponse) => {
+        this.toast.error('Ocorreu um erro', 'Error')
+
+        console.log(err.error.codigo)
+
+        if(err.error.codigo){
+          this.livroForm.controls.codigo.setErrors({codigoEquals: true})
+        }
+
+        console.log(this.livroForm)
+
+      }})
     } else {
       this.viewAllErrorForm = true
     }
@@ -78,11 +93,12 @@ export class MenuComponent implements OnInit {
   }
 
   limparForm() {
-    this.livroForm.setValue({
-      titulo: "",
-      genero: "",
-      codigo: ""
+    this.livroForm = this.form.group({
+      titulo: ["", [Validators.required]],
+      genero: ["", [Validators.required]],
+      codigo: ["", [Validators.required]]
     })
+    this.viewAllErrorForm = false
   }
 
   editarLivro(codigo: string) {
@@ -106,6 +122,12 @@ export class MenuComponent implements OnInit {
             this.modalEdt?.setActive(false)
             this.limparForm()
           })
+        }, error: (err: HttpErrorResponse) => {
+          console.log(err.error.codigo)
+
+          if(err.error.codigo){
+            this.livroForm.controls.codigo.setErrors({codigoEquals: true})
+          }
         }
       })
     } else {

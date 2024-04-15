@@ -1,13 +1,14 @@
 <ng-template #sideLeft>
     <div class="side-left">
-        <button class="btn" (click)="modalCreate.setActive(true)">Cadastrar emprestimo</button>
+        <!-- <button class="btn" (click)="modalCreate.setActive(true)">Cadastrar emprestimo</button> -->
         @for (turma of getTurmas(); track $index) {
         <app-dropdown [title]="turma">
             @for (aluno of alunosByTurma(turma); track $index) {
             <app-dropdown [title]="aluno">
                 <ul class="ler">
                     @for (emprest of getEmprestimoByAluno(turma, aluno) | async; track $index) {
-                    <li class="emprest-row" [ngClass]="statusEmprestimo(emprest)" (click)="emprestEscolhi = emprest; side.active = false">
+                    <li class="emprest-row" [ngClass]="statusEmprestimo(emprest)"
+                        (click)="emprestEscolhi = emprest; side.active = false">
                         {{emprest.titulo}}</li>
                     }
                 </ul>
@@ -19,7 +20,7 @@
 </ng-template>
 
 <app-side-bar #side [side]="'left'">
-    <ng-container [ngTemplateOutlet]="sideLeft"></ng-container>
+    <ng-container *ngTemplateOutlet="sideLeft"></ng-container>
 </app-side-bar>
 
 <app-modal [title]="'Criar emprestimo'" #modalCreate>
@@ -39,54 +40,59 @@
 
 <ng-template #tptEmprest>
     <div class="fields" [formGroup]="emprestForm">
-        <div class="field">
-            <label for="titulo">Titulo*</label>
-            <div class="box">
-                <input id="titulo" type="text" placeholder="titulo" formControlName="titulo">
+        <div class="box">
+            <div class="box-field">
+                <input id="titulo" type="text" placeholder="titulo" formControlName="titulo" required>
+                <label for="titulo">Titulo*</label>
             </div>
             <div class="validate">
                 @if (emprestForm.get('titulo')?.hasError('required') && isEntered('titulo')) {
                 <div>
-                    O campo não pode ser vazio
+                    <i class="fi fi-rr-exclamation"></i> O campo titulo não pode ser vazio
                 </div>
                 }
             </div>
         </div>
-        <div class="field">
-            <label for="matricula">Matricula do aluno*</label>
-            <div class="box">
-                <input id="matricula" type="text" placeholder="matricula" formControlName="matricula">
+        <div class="box">
+            <div class="box-field">
+                <input id="matricula" type="text" placeholder="matricula" formControlName="matricula" required>
+                <label for="matricula">Matricula do aluno*</label>
             </div>
             <div class="validate">
                 @if (emprestForm.get('matricula')?.hasError('required') && isEntered('matricula')) {
                 <div>
-                    O campo não pode ser vazio
+                    <i class="fi fi-rr-exclamation"></i> O campo matricula não pode ser vazio
                 </div>
+                }
+                @if (emprestForm.get('matricula')?.hasError('notFoundAluno') && isEntered('matricula')) {
+                    <div>
+                        <i class="fi fi-rr-exclamation"></i> Não foi encontrado aluno com essa matricula
+                    </div>
                 }
             </div>
         </div>
-        <div class="field">
-            <label for="livros">Livros*</label>
-            <div class="box">
-                <input id="livros" type="text" placeholder="Livros" formControlName="livros">
+        <div class="box">
+            <div class="box-field">
+                <input id="livros" type="text" placeholder="Livros" formControlName="livros" required>
+                <label for="livros">Livros*</label>
             </div>
             <div class="validate">
                 @if (emprestForm.get('livros')?.hasError('required') && isEntered('livros')) {
                 <div>
-                    O campo não pode ser vazio
+                    <i class="fi fi-rr-exclamation"></i> O campo livros não pode ser vazio
                 </div>
                 }
             </div>
         </div>
-        <div class="field">
-            <label for="dateDevolution">Data de devolução*</label>
-            <div class="box">
-                <input id="dateDevolution" type="date" placeholder="data" formControlName="dataDevolucao">
+        <div class="box">
+            <div class="box-field">
+                <input id="dateDevolution" type="date" placeholder="data" formControlName="dataDevolucao" required>
+                <label for="dateDevolution">Data de devolução*</label>
             </div>
             <div class="validate">
                 @if (emprestForm.get('dataDevolucao')?.hasError('required') && isEntered('dataDevolucao')) {
                 <div>
-                    O campo não pode ser vazio
+                    <i class="fi fi-rr-exclamation"></i> O campo de devolução não pode ser vazio
                 </div>
                 }
             </div>
@@ -96,8 +102,9 @@
 
 <section class="emprest">
     <div class="more">
-        <a (click)="side.toogleActive()">Mais<i class="fi fi-rr-menu-dots"></i></a>
-      </div>
+        <a (click)="side.toogleActive()">Selecionar</a>
+        <a (click)="limparForm(); modalCreate.toogleActive()">Cadastrar</a>
+    </div>
     <div class="side-right">
         @if (emprestEscolhi) {
         <h1>{{emprestEscolhi?.titulo}}</h1>

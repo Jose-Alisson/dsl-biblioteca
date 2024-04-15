@@ -7,6 +7,8 @@ import { DropdownComponent } from '../../shared/comps/dropdown/dropdown.componen
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { isEntered } from '../dash/dash.component';
 import { SideBarComponent } from '../../shared/comps/side-bar/side-bar.component';
+import { error } from 'console';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-emprestimo',
@@ -129,6 +131,11 @@ export class EmprestimoComponent implements OnInit {
 
           this.modalCreate?.setActive(false)
           this.limparForm()
+        }, error: (err: HttpErrorResponse) => {
+
+          if(err.error.aluno){
+            this.emprestForm.controls.matricula.setErrors({notFoundAluno: true})
+          }
         }
       })
     } else {
@@ -146,11 +153,11 @@ export class EmprestimoComponent implements OnInit {
   }
 
   limparForm() {
-    this.emprestForm.setValue({
-      titulo: "",
-      matricula: "",
-      livros: "",
-      dataDevolucao: ""
+    this.emprestForm = this.form.group({
+      titulo: ["", [Validators.required]],
+      matricula: ["", [Validators.required]],
+      livros: ["", [Validators.required]],
+      dataDevolucao: ["", [Validators.required]]
     })
 
     this.viewAllErrorForm = false

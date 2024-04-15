@@ -7,6 +7,7 @@ import { ModalComponent } from '../../shared/comps/modal/modal.component';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { isEntered } from '../dash/dash.component';
 import { SideBarComponent } from '../../shared/comps/side-bar/side-bar.component';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-alunos',
@@ -79,11 +80,11 @@ export class AlunosComponent implements OnInit {
   }
 
   limparForm() {
-    this.alunoForm.setValue({
-      nome: "",
-      matricula: "",
-      turma: "",
-      turno: ""
+    this.alunoForm = this.form.group({
+      nome: ["", [Validators.required]],
+      matricula: ["", [Validators.required]],
+      turma: ["", [Validators.required]],
+      turno: ["", [Validators.required]]
     })
 
     this.viewAllErrorForm = false
@@ -91,7 +92,7 @@ export class AlunosComponent implements OnInit {
 
   create() {
     if (this.alunoForm.valid) {
-      this.alunoService.create(this.alunoForm.value).subscribe(data => {
+      this.alunoService.create(this.alunoForm.value).subscribe({next:(data) => {
         this.alunoService.getAlunos().subscribe(data => {
           this.turmas_ = data
           this.turmas$ = of(Object.keys(data).sort((a, b) => this.ordernar(a, b)))
@@ -99,7 +100,11 @@ export class AlunosComponent implements OnInit {
           this.modalCreate?.setActive(false)
           this.limparForm()
         })
-      })
+      }, error: (err: HttpErrorResponse) => {
+        if(err.error.matricula){
+          this.alunoForm.controls.matricula.setErrors({matriculaEquals: true})
+        }
+      }})
     } else {
       this.viewAllErrorForm = true
     }
@@ -107,7 +112,7 @@ export class AlunosComponent implements OnInit {
 
   edit() {
     if (this.alunoForm.valid) {
-      this.alunoService.update(this.aluno_.matricula, this.alunoForm.value).subscribe(data => {
+      this.alunoService.update(this.aluno_.matricula, this.alunoForm.value).subscribe({next:(data) => {
         this.aluno_ = data
 
         this.alunoService.getAlunos().subscribe(data => {
@@ -117,7 +122,13 @@ export class AlunosComponent implements OnInit {
 
         this.modalEdit?.setActive(false)
         this.limparForm()
-      })
+      }, error: (err: HttpErrorResponse) => {
+
+        if(err.error.matricula){
+          this.alunoForm.controls.matricula.setErrors({matriculaEquals: true})
+        }
+        
+      }})
     } else {
       this.viewAllErrorForm = true
     }

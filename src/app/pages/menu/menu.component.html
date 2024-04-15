@@ -1,7 +1,7 @@
 
 <ng-template #sideLeft>
   <div class="side-left">
-    <button class="btn" (click)="limparForm(); modal.setActive(true)">Cadastrar livro</button>
+    <!-- <button class="btn" (click)="limparForm(); modal.setActive(true)">Cadastrar livro</button> -->
     <div class="livros">
       @for (item of livros$ | async; track $index) {
       <div class="livro" (click)="livroE = item; side.active = false">
@@ -20,7 +20,7 @@
   <div class="modal-content">
     <ng-container *ngTemplateOutlet="formulario"></ng-container>
     <br>
-    <button class="btn destaque" (click)="cadastrarLivro()">Cadastrar</button>
+    <button class="btn" (click)="cadastrarLivro()">Cadastrar</button>
   </div>
 </app-modal>
 
@@ -29,13 +29,14 @@
     <ng-container *ngTemplateOutlet="formulario"></ng-container>
     <input type="hidden" name="" #codigo>
     <br>
-    <button class="btn destaque" (click)="codigo.value = livroE.codigo; editarLivro(codigo.value)">Editar</button>
+    <button class="btn" (click)="codigo.value = livroE.codigo; editarLivro(codigo.value)">Editar</button>
   </div>
 </app-modal>
 
 <section class="menu">
   <div class="more">
-    <a (click)="side.toogleActive()">Mais <i class="fi fi-rr-menu-dots"></i></a>
+    <a (click)="side.toogleActive()">Selecionar</a>
+    <a (click)="limparForm(); modal.toogleActive()">Cadastrar</a>
   </div>
   <div class="side-right">
     @if (livroE) {
@@ -63,42 +64,49 @@
 
 <ng-template #formulario>
   <div class="fields" [formGroup]="livroForm">
-    <div class="field">
-      <label for="titulo">Titulo*</label>
-      <div class="box">
-        <input id="titulo" type="text" placeholder="Titulo" formControlName="titulo">
+    <div class="box">
+      <div class="box-field">
+        <input id="titulo" type="text" placeholder="Titulo" formControlName="titulo" required>
+        <label for="titulo">Titulo*</label>
       </div>
       <div class="validate">
         @if (livroForm.get('titulo')?.hasError('required') && isEntered('titulo')) {
         <div>
-          O campo não pode ser vazio
+          <i class="fi fi-rr-exclamation"></i> O campo não pode ser vazio
         </div>
         }
       </div>
     </div>
-    <div class="field">
-      <label for="genero">Gênero*</label>
-      <div class="box">
-        <input id="genero" type="text" placeholder="Gênero" formControlName="genero">
+    <div class="box">
+      <div class="box-field">
+        <input id="genero" type="text" placeholder="Gênero" formControlName="genero" required>
+        <label for="genero">Gênero*</label>
       </div>
       <div class="validate">@if (livroForm.get('genero')?.hasError('required') && isEntered('genero')) {
         <div>
-          O campo não pode ser vazio
+          <i class="fi fi-rr-exclamation"></i> O campo não pode ser vazio
         </div>
         }
       </div>
     </div>
-    <div class="field">
-      <label for="codigo">Código*</label>
-      <div class="box">
-        <input id="codigo" type="text" placeholder="Código" formControlName="codigo">
+    <div class="box">
+      <div class="box-field">
+        <input id="codigo" type="text" placeholder="Código" formControlName="codigo" required>
+        <label for="codigo">Código*</label>
       </div>
       <div class="validate">
         @if (livroForm.get('codigo')?.hasError('required') && isEntered('codigo')) {
         <div>
-          O campo não pode ser vazio
+          <i class="fi fi-rr-exclamation"></i> O campo não pode ser vazio
         </div>
         }
+
+        @if(livroForm.get('codigo')?.hasError('codigoEquals')){
+          <div>
+            <i class="fi fi-rr-exclamation"></i> Livro já existe com esse código
+          </div>
+        }
+          
       </div>
 
     </div>

@@ -20,6 +20,11 @@
       <h2>Alunos</h2>
       &nbsp;
     </li>
+    <li (click)="sair()">
+      <i class="fi fi-rr-exit"></i>
+      <h2>Sair</h2>
+      &nbsp;
+    </li>
   </ul>
 </app-side-bar>
 <app-cart #cart ></app-cart>
@@ -30,14 +35,15 @@
         <img src="../../../assets/dsl logo.jpg" alt="Logo DSl" />
       </div>
       <div class="text header-text">
-        <div class="establishment">DSL</div>
-        <div class="name">Biblioteca</div>
+        <div class="establishment">Biblioteca</div>
+        <div class="name">Raquel de Queiroz</div>
       </div>
     </div>
     <ul>
       <li [routerLink]="['./menu']" routerLinkActive="active" >Livros</li>
       <li [routerLink]="['./emprest']" routerLinkActive="active" >Emprestimos</li>
       <li [routerLink]="['./aluno']" routerLinkActive="active">Alunos</li>
+      <li (click)="sair()" style="display: flex;gap: 10px;align-items: center;"><i class="fi fi-rr-exit"></i> Sair</li>
     </ul>
     <div class="nav-actions">
       <!-- <div class="search">

@@ -37,6 +37,7 @@ section.aluno {
 
 
 .ler {
+    list-style: none;
     .emprest-row {
         cursor: pointer;
         padding: 10px 15px;
@@ -112,17 +113,18 @@ section.aluno {
     --color-primary: rgba(128 128 128 / 17%);
     --color-secondy: black;
     --color-border: transparent;
-}
-
-.validate {
-    font-size: 1.6rem;
-    color: tomato;
+    --color-background: white;
+    display: flex;
+    flex-direction: column;
 }
 
 .more {
     padding: 10px;
+    display: flex;
+    gap: 10px;
     border-bottom: 1px solid #eeee;
-
+    overflow-x: auto;
+    
     a {
         display: block;
         width: fit-content;
@@ -142,9 +144,9 @@ section.aluno {
 
 @media screen and (max-width: 550px) {
 
-    .more {
-        display: block !important;
-    }
+    // .more {
+    //     display: block !important;
+    // }
 
     .side-left {
         max-width: none !important;
