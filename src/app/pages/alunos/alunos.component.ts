@@ -8,11 +8,22 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { isEntered } from '../dash/dash.component';
 import { SideBarComponent } from '../../shared/comps/side-bar/side-bar.component';
 import { HttpErrorResponse } from '@angular/common/http';
+import { InputFormComponent } from '../../shared/comps/form/input-form/input-form.component';
+import { ValidateComponent } from '../../shared/comps/form/validate/validate.component';
 
 @Component({
   selector: 'app-alunos',
   standalone: true,
-  imports: [DropdownComponent, AsyncPipe, ModalComponent, ReactiveFormsModule, NgTemplateOutlet, SideBarComponent],
+  imports: [
+    DropdownComponent, 
+    AsyncPipe, 
+    ModalComponent, 
+    ReactiveFormsModule, 
+    NgTemplateOutlet, 
+    SideBarComponent, 
+    InputFormComponent, 
+    ValidateComponent
+  ],
   templateUrl: './alunos.component.html',
   styleUrl: './alunos.component.scss'
 })
@@ -92,19 +103,21 @@ export class AlunosComponent implements OnInit {
 
   create() {
     if (this.alunoForm.valid) {
-      this.alunoService.create(this.alunoForm.value).subscribe({next:(data) => {
-        this.alunoService.getAlunos().subscribe(data => {
-          this.turmas_ = data
-          this.turmas$ = of(Object.keys(data).sort((a, b) => this.ordernar(a, b)))
+      this.alunoService.create(this.alunoForm.value).subscribe({
+        next: (data) => {
+          this.alunoService.getAlunos().subscribe(data => {
+            this.turmas_ = data
+            this.turmas$ = of(Object.keys(data).sort((a, b) => this.ordernar(a, b)))
 
-          this.modalCreate?.setActive(false)
-          this.limparForm()
-        })
-      }, error: (err: HttpErrorResponse) => {
-        if(err.error.matricula){
-          this.alunoForm.controls.matricula.setErrors({matriculaEquals: true})
+            this.modalCreate?.setActive(false)
+            this.limparForm()
+          })
+        }, error: (err: HttpErrorResponse) => {
+          if (err.error.matricula) {
+            this.alunoForm.controls.matricula.setErrors({ matriculaEquals: true })
+          }
         }
-      }})
+      })
     } else {
       this.viewAllErrorForm = true
     }
@@ -112,23 +125,25 @@ export class AlunosComponent implements OnInit {
 
   edit() {
     if (this.alunoForm.valid) {
-      this.alunoService.update(this.aluno_.matricula, this.alunoForm.value).subscribe({next:(data) => {
-        this.aluno_ = data
+      this.alunoService.update(this.aluno_.matricula, this.alunoForm.value).subscribe({
+        next: (data) => {
+          this.aluno_ = data
 
-        this.alunoService.getAlunos().subscribe(data => {
-          this.turmas_ = data
-          this.turmas$ = of(Object.keys(data).sort((a, b) => this.ordernar(a, b)))
-        })
+          this.alunoService.getAlunos().subscribe(data => {
+            this.turmas_ = data
+            this.turmas$ = of(Object.keys(data).sort((a, b) => this.ordernar(a, b)))
+          })
 
-        this.modalEdit?.setActive(false)
-        this.limparForm()
-      }, error: (err: HttpErrorResponse) => {
+          this.modalEdit?.setActive(false)
+          this.limparForm()
+        }, error: (err: HttpErrorResponse) => {
 
-        if(err.error.matricula){
-          this.alunoForm.controls.matricula.setErrors({matriculaEquals: true})
+          if (err.error.matricula) {
+            this.alunoForm.controls.matricula.setErrors({ matriculaEquals: true })
+          }
+
         }
-        
-      }})
+      })
     } else {
       this.viewAllErrorForm = true
     }
@@ -145,7 +160,7 @@ export class AlunosComponent implements OnInit {
     })
   }
 
-  isEntered(controlName: string){
+  isEntered(controlName: string) {
     return (isEntered(this.alunoForm, controlName) || this.viewAllErrorForm)
   }
 }

@@ -1,0 +1,9 @@
+<div class="box">
+    <div class="box-field">
+        <textarea [id]="title() + 'input'" [placeholder]="title()" [formControl]="control()" required cols="30" rows="10" style="resize: none;"></textarea>
+        <label [for]="title() + 'input'">{{title() + (required() ? '*' : '')}}</label>
+    </div>
+    <div class="validate">
+        <ng-content></ng-content>
+    </div>
+</div>

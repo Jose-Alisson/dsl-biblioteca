@@ -5,18 +5,22 @@
 section.menu {
   display: flex;
   //flex-wrap: wrap;
-  flex-direction: column;
+  flex-direction: row;
   //background: #060606;
   //color: white;
-
-  
-
   .side-right {
     flex-grow: 1;
     padding: 1em;
     display: flex;
     flex-direction: column;
     gap: 1em;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: sticky;
+    top: 0;
   }
 }
 .side-left {
@@ -71,11 +75,12 @@ section.menu {
 .livro{
   cursor: pointer;
   padding: 10px 15px;
-  border-radius: 7px;
-  background: color-mix(in oklab, white 10%, transparent);
-  border: 1px solid color-mix(in oklab, white 60%, transparent);
   margin-top: 2px;
-  color: white;
+  background: color-mix(in oklab, white 10%, transparent);
+  border-right: 2px solid color-mix(in oklab, var(--color-border) 100%, transparent);
+  margin-top: 2px;
+  color: black;
+  border-bottom: 1px solid #eeee;
 
   &.atrasado{
       background: color-mix(in oklab, tomato 10%, transparent);
@@ -137,8 +142,8 @@ section.menu {
   border: 0;
   cursor: pointer;
   outline: none;
-  background: #060606;
-  color: aquamarine;
+  background: #bcffe8;
+  color: black;
 }
 
 .btn.destaque{
@@ -174,11 +179,13 @@ section.menu {
 }
 
 .dlt{
-  color: tomato;
+  background: tomato;
+  color: white;
 }
 
 .edt{
-  color: #feca57;
+  background: #feca57;
+  color: white;
 }
 
 .validate{
@@ -193,6 +200,10 @@ section.menu {
     min-width: 250px !important;
   }
 
+  .more {
+    display: flex !important;
+  }
+
   .not-selected img{
     width: auto;
   }
@@ -205,7 +216,8 @@ section.menu {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  border-bottom: 1px solid #eeeeee;
+  border-radius: 7px;
+  box-shadow: 0px 2px 10px rgba(128 128 128 / 17%);
 }
 
 .buttons{
@@ -229,11 +241,34 @@ section.menu {
       gap: 10px;
       align-items: center;
       transition: 0.2s;
-      background: #060606;
-      color: white;
+      color: black;
 
       &:hover {
-          color: aquamarine;
+          color: white;
+          background: black;
       }
   }
+}
+
+
+.filter-ul{
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 5px;
+
+  li{
+    padding: 10px 15px;
+    border-radius: 7px;
+
+    &:hover{
+      background: rgba(128 128 128 / 52%);
+    }
+  }
+
+}
+
+
+.fields{
+  gap: 10px;
 }

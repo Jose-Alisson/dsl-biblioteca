@@ -109,6 +109,7 @@ body {
   opacity: 1;
 }
 
+
 .validate {
   font-size: 1.6rem;
   color: tomato;
@@ -120,6 +121,17 @@ body {
     border-radius: 7px;
     background: color-mix(in srgb, tomato 10%, transparent 80%);
   }
+}
+
+
+.validate-message {
+  font-size: 1.6rem;
+  color: tomato;
+  display: flex;
+  gap: 5px;
+  padding: 5px 10px;
+  border-radius: 7px;
+  background: color-mix(in srgb, tomato 10%, transparent 80%);
 }
 
 @media screen and (max-width: 552px) {

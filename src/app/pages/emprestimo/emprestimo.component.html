@@ -65,9 +65,9 @@
                 </div>
                 }
                 @if (emprestForm.get('matricula')?.hasError('notFoundAluno') && isEntered('matricula')) {
-                    <div>
-                        <i class="fi fi-rr-exclamation"></i> Não foi encontrado aluno com essa matricula
-                    </div>
+                <div>
+                    <i class="fi fi-rr-exclamation"></i> Não foi encontrado aluno com essa matricula
+                </div>
                 }
             </div>
         </div>
@@ -107,30 +107,35 @@
     </div>
     <div class="side-right">
         @if (emprestEscolhi) {
-        <h1>{{emprestEscolhi?.titulo}}</h1>
-        <h3>{{emprestEscolhi?.aluno?.nome}} - {{emprestEscolhi?.aluno?.turma}}</h3>
-        <div class="livros">
-            @for (livro of emprestEscolhi?.livros; track $index) {
-            <div class="livro">
-                {{livro.titulo}}
+        <div class="card">
+            <h1>{{emprestEscolhi?.titulo}}</h1>
+            <h3>{{emprestEscolhi?.aluno?.nome}} {{emprestEscolhi?.aluno?.turma}}</h3>
+            <div class="livros">
+                @for (livro of emprestEscolhi?.livros; track $index) {
+                <div class="livro">
+                    {{livro.titulo}}
+                </div>
+                }
             </div>
-            }
+            <div class="datas">
+                <div class="criacao">
+                    <p>Data de Criação:</p>
+                    <h3>{{emprestEscolhi?.dataCriacao | date : 'dd/MM/yyyy'}}</h3>
+                </div>
+                <div class="devolucao">
+                    <p>Prazo para Devolução:</p>
+                    <h3>{{emprestEscolhi?.dataDevolucao | date : 'dd/MM/yyyy'}}</h3>
+                </div>
+            </div>
+            <div class="buttons" style="display: flex;gap: 15px;flex-wrap: wrap;">
+                <button class="btn btn-l edt" (click)="setValues(); modalEdit.setActive(true)">Editar
+                    Emprestimo</button>
+                <button class="btn btn-l dlt" (click)="deleteEmprest()">Deletar Emprestimo</button>
+            </div>
         </div>
-        <div class="datas">
-            <div class="criacao">
-                <h3>Data de Criação:</h3>
-                <p>{{emprestEscolhi?.dataCriacao | date : 'dd/MM/yyyy'}}</p>
-            </div>
-            <div class="devolucao">
-                <h3>Prazo para Devolução:</h3>
-                <p>{{emprestEscolhi?.dataDevolucao | date : 'dd/MM/yyyy'}}</p>
-            </div>
-        </div>
-        <button class="btn btn-l edt" (click)="setValues(); modalEdit.setActive(true)">Editar Emprestimo</button>
-        <button class="btn btn-l dlt" (click)="deleteEmprest()">Deletar Emprestimo</button>
         @if(emprestEscolhi.dataDevolvida){
-        <h3>Data de Devolução:</h3>
-        <p>{{emprestEscolhi?.dataDevolucao | date : 'dd/MM/yyyy'}}</p>
+        <p>Data de Devolução:</p>
+        <h3>{{emprestEscolhi?.dataDevolucao | date : 'dd/MM/yyyy'}}</h3>
         }
         }@else {
         <div class="preview">

@@ -1,0 +1,9 @@
+<div class="box">
+    <div class="box-field">
+        <input [id]="title() + 'input'" [type]="type()" [placeholder]="title()" [formControl]="control()" required>
+        <label [for]="title() + 'input'">{{title() + (!required() ? '(Opcional)' : '')}}</label>
+    </div>
+    <div class="validate">
+        <ng-content></ng-content>
+    </div>
+</div>

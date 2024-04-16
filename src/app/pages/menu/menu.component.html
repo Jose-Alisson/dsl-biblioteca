@@ -1,14 +1,40 @@
-
 <ng-template #sideLeft>
   <div class="side-left">
     <!-- <button class="btn" (click)="limparForm(); modal.setActive(true)">Cadastrar livro</button> -->
-    <div class="livros">
+    <app-dropdown [title]="filter.toLocaleUpperCase()">
+      <ul class="filter-ul">
+        <li (click)="filter = 'autor'">Autor</li>
+        <li (click)="filter = 'editora'">Editora</li>
+        <li (click)="filter = 'genero'">Gênero</li>
+      </ul>
+    </app-dropdown>
+
+    <!-- <div class="livros">
       @for (item of livros$ | async; track $index) {
       <div class="livro" (click)="livroE = item; side.active = false">
         {{item?.titulo}}
       </div>
       }
+    </div> -->
+
+    <div *ngIf="(livros$ | async) as livros; else loading" >
+      @for (item of livros | filter: filter : null; track $index) {
+      <div style="margin-bottom: 15px;">
+        <h2 style="text-align: center;">{{item}}</h2>
+        <div class="livros" style="--color-border: {{getRandomColor()}}" style="display: flex;flex-direction: column; gap: px;">
+          @for (livro of livros | filter: filter : '' + item; track $index) {
+          <div class="livro" (click)="livroE = livro; side.active = false">
+            {{livro?.titulo}}
+          </div>
+          }
+        </div>
+      </div>
+      }
     </div>
+
+    <ng-template #loading>
+      <p>Carregando...</p>
+    </ng-template>
   </div>
 </ng-template>
 
@@ -32,25 +58,34 @@
     <button class="btn" (click)="codigo.value = livroE.codigo; editarLivro(codigo.value)">Editar</button>
   </div>
 </app-modal>
-
+<div class="more">
+  <a (click)="side.toogleActive()">Selecionar</a>
+  <a (click)="limparForm(); modal.toogleActive()">Cadastrar</a>
+</div>
 <section class="menu">
-  <div class="more">
-    <a (click)="side.toogleActive()">Selecionar</a>
-    <a (click)="limparForm(); modal.toogleActive()">Cadastrar</a>
-  </div>
+  <!-- <div>
+    <ng-container *ngTemplateOutlet="sideLeft"></ng-container>
+  </div> -->
   <div class="side-right">
     @if (livroE) {
     <div class="card">
       <h2>{{livroE?.titulo}}</h2>
-      <h4>Gênero - {{livroE?.genero}}</h4>
-      <h4>Codigo - {{livroE?.codigo}}</h4>
+      <p>Autor <strong>{{livroE?.autor}}</strong></p>
+      <p>Editora <strong>{{livroE?.editora}}</strong></p>
+      <p>Gênero <strong>{{livroE?.genero}}</strong></p>
+      <p>Codigo <strong>{{livroE?.codigo}}</strong> </p>
+      <p>Quantidade  <strong>{{livroE?.quantidade}}</strong></p>
+      <p>Observação: <br> <strong>{{livroE?.observacao}}</strong></p>
       <div class="buttons">
         <button class="btn edt btn-l" (click)="setValuesModal(); modalEdt.setActive(true)">Editar Livro</button>
         <button class="btn dlt btn-l" (click)="deletarLivro(livroE?.codigo)">Deletar Livro</button>
       </div>
     </div>
-
-
+    <!-- <ng-container *ngTemplateOutlet="formulario"></ng-container>
+    <div class="buttons">
+      <button class="btn edt btn-l" (click)="setValuesModal(); modalEdt.setActive(true)">Editar Livro</button>
+      <button class="btn dlt btn-l" (click)="deletarLivro(livroE?.codigo)">Deletar Livro</button>
+    </div> -->
     }
     @else {
     <div class="not-selected">
@@ -63,52 +98,61 @@
 </section>
 
 <ng-template #formulario>
-  <div class="fields" [formGroup]="livroForm">
-    <div class="box">
-      <div class="box-field">
-        <input id="titulo" type="text" placeholder="Titulo" formControlName="titulo" required>
-        <label for="titulo">Titulo*</label>
-      </div>
-      <div class="validate">
-        @if (livroForm.get('titulo')?.hasError('required') && isEntered('titulo')) {
-        <div>
-          <i class="fi fi-rr-exclamation"></i> O campo não pode ser vazio
-        </div>
-        }
-      </div>
-    </div>
-    <div class="box">
-      <div class="box-field">
-        <input id="genero" type="text" placeholder="Gênero" formControlName="genero" required>
-        <label for="genero">Gênero*</label>
-      </div>
-      <div class="validate">@if (livroForm.get('genero')?.hasError('required') && isEntered('genero')) {
-        <div>
-          <i class="fi fi-rr-exclamation"></i> O campo não pode ser vazio
-        </div>
-        }
-      </div>
-    </div>
-    <div class="box">
-      <div class="box-field">
-        <input id="codigo" type="text" placeholder="Código" formControlName="codigo" required>
-        <label for="codigo">Código*</label>
-      </div>
-      <div class="validate">
-        @if (livroForm.get('codigo')?.hasError('required') && isEntered('codigo')) {
-        <div>
-          <i class="fi fi-rr-exclamation"></i> O campo não pode ser vazio
-        </div>
-        }
+  <div class="fields">
+    <div style="display: flex; gap: 10px;">
+      <app-input [control]="livroForm.controls.autor" [title]="'autor'" [required]="true" #autor>
+        <app-validate [control]="autor.control()" [viewAllError]="viewAllErrorForm" [validatorName]="'required'"
+          [message]="'O campo não pode ser vazio'" />
+      </app-input>
 
-        @if(livroForm.get('codigo')?.hasError('codigoEquals')){
-          <div>
-            <i class="fi fi-rr-exclamation"></i> Livro já existe com esse código
-          </div>
-        }
-          
-      </div>
+      <app-input [control]="livroForm.controls.editora" [title]="'editora'" [required]="true" #editora>
+        <app-validate [control]="editora.control()" [viewAllError]="viewAllErrorForm" [validatorName]="'required'"
+          [message]="'O campo não pode ser vazio'" />
+      </app-input>
 
+      <app-input [control]="livroForm.controls.codigo" [title]="'codigo'" [required]="true" #codigo>
+        <app-validate [control]="codigo.control()" [viewAllError]="viewAllErrorForm" [validatorName]="'required'"
+          [message]="'O campo não pode ser vazio'" />
+        <app-validate [control]="codigo.control()" [viewAllError]="viewAllErrorForm" [validatorName]="'codigoEquals'"
+          [message]="'Livro já existe com esse código'" />
+      </app-input>
+    </div>
+    <div>
+      <app-input [control]="livroForm.controls.titulo" [title]="'titulo'" [required]="true" #titulo>
+        <app-validate [control]="titulo.control()" [viewAllError]="viewAllErrorForm" [validatorName]="'required'"
+          [message]="'O campo não pode ser vazio'" />
+      </app-input>
+    </div>
+    <div>
+      <app-input [control]="livroForm.controls.genero" [title]="'genero textual'" [required]="true" #genero>
+        <app-validate [control]="genero.control()" [viewAllError]="viewAllErrorForm" [validatorName]="'required'"
+          [message]="'O campo não pode ser vazio'" />
+      </app-input>
+    </div>
+    <div style="display: flex;gap: 10px;justify-content: space-between;">
+      <app-input [control]="livroForm.controls.volume" [title]="'volume'" [required]="true" #volume>
+        <app-validate [control]="volume.control()" [viewAllError]="viewAllErrorForm" [validatorName]="'required'"
+          [message]="'O campo não pode ser vazio'" />
+      </app-input>
+
+      <app-input [control]="livroForm.controls.quantidade" [title]="'quantidade'" [required]="true" #quantidade>
+        <app-validate [control]="quantidade.control()" [viewAllError]="viewAllErrorForm" [validatorName]="'required'"
+          [message]="'O campo não pode ser vazio'" />
+      </app-input>
+    </div>
+    <div>
+      <app-text-area-form [control]="livroForm.controls.observacao" [title]="'observação'" [required]="true" #observ>
+        <app-validate [control]="observ.control()" [viewAllError]="viewAllErrorForm" [validatorName]="'required'"
+          [message]="'O campo não pode ser vazio'" />
+      </app-text-area-form>
     </div>
   </div>
+
+
+
+
+
+
+
+
 </ng-template>

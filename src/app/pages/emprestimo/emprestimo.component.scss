@@ -45,7 +45,7 @@ section.aluno {
         background: color-mix(in oklab, white 10%, transparent);
         border: 1px solid color-mix(in oklab, white 60%, transparent);
         margin-top: 2px;
-        color: white;
+        color: black;
 
         &.atrasado {
             background: color-mix(in oklab, tomato 10%, transparent);
@@ -62,14 +62,14 @@ section.aluno {
 
 .livro {
     padding: 20px 25px;
-    border-radius: 20px;
-
     background: color-mix(in oklab, #eeeeee 100%, transparent);
 }
 
 .datas {
     display: flex;
     justify-content: space-between;
+    gap: 5px;
+    flex-wrap: wrap;
 }
 
 .btn {
@@ -78,8 +78,8 @@ section.aluno {
     border: 0;
     cursor: pointer;
     outline: none;
-    background: #060606;
-    color: #7fffd4;
+    background: #bcffe8;
+    color: black;
 }
 
 .btn-l {
@@ -87,11 +87,13 @@ section.aluno {
 }
 
 .dlt {
-    color: tomato;
+    background: tomato;
+    color: white;
 }
 
 .edt {
-    color: #feca57;
+    background: #feca57;
+    color: white;
 }
 
 .preview {
@@ -130,14 +132,15 @@ section.aluno {
         width: fit-content;
         padding: 10px 15px;
         transition: 0.2s;
-        background: #060606;
-        color: white;
+        //background: #060606;
+        color: black;
         display: flex;
         gap: 10px;
         align-items: center;
 
         &:hover {
-            color: aquamarine;
+            color: white;
+            background: black;
         }
     }
 }
@@ -166,4 +169,13 @@ section.aluno {
     display: flex;
     flex-direction: column;
     gap: 10px;
+}
+
+.card{
+    background: white;
+    padding: 10px 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    border-bottom: 1px solid #eeeeee;
 }

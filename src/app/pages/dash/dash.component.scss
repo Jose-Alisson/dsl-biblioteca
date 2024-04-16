@@ -11,7 +11,7 @@ app-side-bar ul {
 
   li {
     padding: 15px 20px;
-    color: aquamarine;
+    color: black;
     border-radius: 7px;
     transition: 0.2s ease;
     gap: 30px;
@@ -21,7 +21,7 @@ app-side-bar ul {
   }
 
   li.active {
-    background: white;
+    background: #e5fff6;
     color: #181818;
   }
 }
